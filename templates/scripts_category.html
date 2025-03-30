@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.nome }} - CyberLab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scripts.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberLab</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/sobre">Sobre o Laboratório</a></li>
+                    <li><a href="/roadmap">Roadmap</a></li>
+                    <li><a href="/">Laboratórios</a></li>
+                    <li><a href="/scripts" class="active">Scripts</a></li>
+                    <li><a href="/vagas">Vagas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="category-banner" data-category="{{ category.id }}">
+            <div class="category-banner-content">
+                <div class="category-banner-icon">
+                    {% if category.id == 'red-team' %}
+                        <i class="fas fa-user-ninja"></i>
+                    {% elif category.id == 'blue-team' %}
+                        <i class="fas fa-shield-alt"></i>
+                    {% elif category.id == 'pentesting' %}
+                        <i class="fas fa-laptop-code"></i>
+                    {% elif category.id == 'exploits' %}
+                        <i class="fas fa-bug"></i>
+                    {% elif category.id == 'recon' %}
+                        <i class="fas fa-search"></i>
+                    {% elif category.id == 'post-exploit' %}
+                        <i class="fas fa-door-open"></i>
+                    {% elif category.id == 'crypto' %}
+                        <i class="fas fa-key"></i>
+                    {% elif category.id == 'network' %}
+                        <i class="fas fa-network-wired"></i>
+                    {% elif category.id == 'web' %}
+                        <i class="fas fa-globe"></i>
+                    {% elif category.id == 'malware' %}
+                        <i class="fas fa-virus"></i>
+                    {% else %}
+                        <i class="fas fa-code"></i>
+                    {% endif %}
+                </div>
+                <h2>{{ category.nome }}</h2>
+                <p>{{ category.descricao }}</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Conteúdo específico para cada categoria -->
+            {% if category.id == 'red-team' %}
+                <div class="category-description">
+                    <h3>O que é Red Team?</h3>
+                    <p>O Red Team é um grupo de profissionais de segurança que simula ataques reais contra uma organização para testar suas defesas. Diferente dos testes de penetração tradicionais, o Red Team utiliza técnicas avançadas de evasão, persistência e movimentação lateral que simulam ameaças reais.</p>
+                    
+                    <div class="topics-overview">
+                        <h4>Principais áreas do Red Team:</h4>
+                        <div class="topics-grid">
+                            <div class="topic-item">
+                                <i class="fas fa-user-secret"></i>
+                                <h5>Social Engineering</h5>
+                                <p>Técnicas que exploram o fator humano como ponto fraco de segurança.</p>
+                            </div>
+                            <div class="topic-item">
+                                <i class="fas fa-network-wired"></i>
+                                <h5>Network Infiltration</h5>
+                                <p>Métodos para contornar controles de rede e obter acesso inicial.</p>
+                            </div>
+                            <div class="topic-item">
+                                <i class="fas fa-laptop-code"></i>
+                                <h5>Custom Exploit Development</h5>
+                                <p>Desenvolvimento de exploits específicos para determinados alvos.</p>
+                            </div>
+                            <div class="topic-item">
+                                <i class="fas fa-route"></i>
+                                <h5>Lateral Movement</h5>
+                                <p>Técnicas para se movimentar dentro da rede após o acesso inicial.</p>
+                            </div>
+                            <div class="topic-item">
+                                <i class="fas fa-user-lock"></i>
+                                <h5>Privilege Escalation</h5>
+                                <p>Métodos para elevar privilégios em sistemas comprometidos.</p>
+                            </div>
+                            <div class="topic-item">
+                                <i class="fas fa-clock"></i>
+                                <h5>Persistence</h5>
+                                <p>Técnicas para manter acesso persistente aos sistemas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="scripts-filters">
+                <div class="filter-group">
+                    <span class="filter-label">Linguagem:</span>
+                    <select class="filter-select" id="languageFilter">
+                        <option value="all">Todas</option>
+                        <option value="python">Python</option>
+                        <option value="bash">Bash/Shell</option>
+                        <option value="powershell">PowerShell</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="go">Go</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="c">C/C++</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Nível:</span>
+                    <select class="filter-select" id="levelFilter">
+                        <option value="all">Todos</option>
+                        <option value="beginner">Básico</option>
+                        <option value="intermediate">Intermediário</option>
+                        <option value="advanced">Avançado</option>
+                    </select>
+                </div>
+                
+                <div class="scripts-count">
+                    <span id="scriptsCount">Mostrando 12 de 24 scripts</span>
+                </div>
+            </div>
+
+            <!-- Lista de scripts baseada na categoria -->
+            <div class="scripts-grid" id="scriptsGrid">
+                <!-- Scripts para Red Team -->
+                {% if category.id == 'red-team' %}
+                    <div class="script-card" data-language="python" data-level="advanced">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Esteganografia com Metasploit</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Embedding de payload Metasploit em imagens para evasão de detecção.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/red-team/metasploit-steganography" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="powershell" data-level="intermediate">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Empire C2 Launcher</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Scripts de PowerShell para estabelecer comunicação com Empire C2.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> PowerShell</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/red-team/empire-c2-launcher" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="python" data-level="intermediate">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Domain Fronting Tool</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Utilização de domain fronting para evasão de detecção de C2.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/red-team/domain-fronting" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="go" data-level="advanced">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>C2 Over DNS</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Framework para estabelecer canais de comando e controle via DNS.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Go</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/red-team/c2-over-dns" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="powershell" data-level="advanced">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>AMSI Bypass Techniques</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Técnicas para bypass do Windows Antimalware Scan Interface.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> PowerShell</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/red-team/amsi-bypass" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="python" data-level="intermediate">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Custom Keylogger</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Keylogger multiplataforma com exfiltração de dados via SMTP.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/red-team/custom-keylogger" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="bash" data-level="beginner">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Reverse Shell Generator</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Gerador de payloads de reverse shell para diferentes plataformas.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Bash</span>
+                                <span><i class="fas fa-level-up-alt"></i> Básico</span>
+                            </div>
+                            <a href="/scripts/red-team/reverse-shell-generator" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="c" data-level="advanced">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Process Injection Techniques</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Implementação de diversas técnicas de injeção de processos no Windows.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> C/C++</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/red-team/process-injection" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card" data-language="python" data-level="advanced">
+                      <div class="script-header">
+                          <span class="script-tag red-team">Red Team</span>
+                          <h4>UAC Bypass Toolkit</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Coleção de técnicas para bypass do User Account Control no Windows.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                          </div>
+                          <a href="/scripts/red-team/uac-bypass" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="ruby" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag red-team">Red Team</span>
+                          <h4>Metasploit Resource Script</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Scripts para automatizar fluxos de trabalho comuns no Metasploit Framework.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Ruby</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/red-team/metasploit-resource" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="powershell" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag red-team">Red Team</span>
+                          <h4>ActiveDirectory Enumeration</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Scripts para enumeração de ambientes Active Directory após acesso inicial.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> PowerShell</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/red-team/ad-enumeration" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="advanced">
+                      <div class="script-header">
+                          <span class="script-tag red-team">Red Team</span>
+                          <h4>Credential Harvester</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Framework para extração de credenciais de diferentes fontes em sistemas comprometidos.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                          </div>
+                          <a href="/scripts/red-team/credential-harvester" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+              {% endif %}
+
+              <!-- Scripts para Blue Team -->
+              {% if category.id == 'blue-team' %}
+                  <div class="script-card" data-language="python" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Análise Automatizada de Logs</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Script para detecção de padrões suspeitos em logs de servidores web.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/blue-team/automated-log-analysis" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>IOC Scanner</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Ferramenta para busca de Indicadores de Comprometimento (IOCs) em sistemas.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/blue-team/ioc-scanner" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="powershell" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Windows Event Log Monitor</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Monitoramento e alerta de eventos críticos de segurança no Windows.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> PowerShell</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/blue-team/windows-event-monitor" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="advanced">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Network Behavior Analysis</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Detecção de anomalias em tráfego de rede usando machine learning.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                          </div>
+                          <a href="/scripts/blue-team/network-behavior-analysis" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="bash" data-level="beginner">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Linux Hardening Script</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Script automatizado para aplicação de configurações de segurança em servidores Linux.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Bash</span>
+                              <span><i class="fas fa-level-up-alt"></i> Básico</span>
+                          </div>
+                          <a href="/scripts/blue-team/linux-hardening" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="advanced">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Memory Forensics Tool</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Framework para análise de memória RAM para investigação de incidentes.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                          </div>
+                          <a href="/scripts/blue-team/memory-forensics" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Endpoint Monitoring System</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Monitoramento em tempo real de atividades suspeitas em endpoints Windows e Linux.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/blue-team/endpoint-monitoring" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="go" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>DNS Traffic Analyzer</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Ferramenta para detecção de exfiltração de dados e C2 via DNS.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Go</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/blue-team/dns-traffic-analyzer" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="intermediate">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Phishing Email Analyzer</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Ferramenta para análise automatizada de emails suspeitos e extração de IOCs.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                          </div>
+                          <a href="/scripts/blue-team/phishing-analyzer" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="python" data-level="beginner">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Threat Intelligence Collector</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Coleta e agregação de indicadores de ameaças de múltiplas fontes abertas.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> Python</span>
+                              <span><i class="fas fa-level-up-alt"></i> Básico</span>
+                          </div>
+                          <a href="/scripts/blue-team/threat-intel-collector" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+
+                  <div class="script-card" data-language="powershell" data-level="advanced">
+                      <div class="script-header">
+                          <span class="script-tag blue-team">Blue Team</span>
+                          <h4>Windows Registry Monitor</h4>
+                      </div>
+                      <div class="script-content">
+                          <p>Monitoramento de alterações críticas no registro do Windows para detecção de persistência.</p>
+                          <div class="script-meta">
+                              <span><i class="fas fa-code-branch"></i> PowerShell</span>
+                              <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                          </div>
+                          <a href="/scripts/blue-team/registry-monitor" class="view-script-btn">Ver Script</a>
+                      </div>
+                  </div>
+              {% endif %}
+
+              <!-- Scripts para outras categorias seriam adicionados de forma similar -->
+          </div>
+
+          <div class="pagination">
+              <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+              <button class="pagination-btn active">1</button>
+              <button class="pagination-btn">2</button>
+              <button class="pagination-btn">3</button>
+              <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+      </div>
+  </main>
+
+  <footer>
+      <div class="container">
+          <p>&copy; 2025 CyberLab - Laboratório de Cyber Segurança</p>
+      </div>
+  </footer>
+
+  <script>
+      // Garantir que a página carregue no topo
+      window.scrollTo(0, 0);
+      
+      document.addEventListener('DOMContentLoaded', function() {
+          // Configurar filtros de linguagem e nível
+          const languageFilter = document.getElementById('languageFilter');
+          const levelFilter = document.getElementById('levelFilter');
+          const scriptsGrid = document.getElementById('scriptsGrid');
+          const scriptCards = document.querySelectorAll('.script-card');
+          const scriptsCount = document.getElementById('scriptsCount');
+          
+          function applyFilters() {
+              const selectedLanguage = languageFilter.value;
+              const selectedLevel = levelFilter.value;
+              
+              let visibleCount = 0;
+              let totalCount = scriptCards.length;
+              
+              scriptCards.forEach(card => {
+                  const cardLanguage = card.getAttribute('data-language');
+                  const cardLevel = card.getAttribute('data-level');
+                  
+                  const languageMatch = selectedLanguage === 'all' || cardLanguage === selectedLanguage;
+                  const levelMatch = selectedLevel === 'all' || cardLevel === selectedLevel;
+                  
+                  if (languageMatch && levelMatch) {
+                      card.style.display = 'block';
+                      visibleCount++;
+                  } else {
+                      card.style.display = 'none';
+                  }
+              });
+              
+              // Atualizar contador de scripts
+              scriptsCount.textContent = `Mostrando ${visibleCount} de ${totalCount} scripts`;
+          }
+          
+          // Aplicar filtros quando mudar a seleção
+          languageFilter.addEventListener('change', applyFilters);
+          levelFilter.addEventListener('change', applyFilters);
+          
+          // Configurar paginação
+          const paginationBtns = document.querySelectorAll('.pagination-btn');
+          paginationBtns.forEach(btn => {
+              btn.addEventListener('click', function() {
+                  if (this.disabled) return;
+                  
+                  // Remover classe ativa de todos os botões
+                  paginationBtns.forEach(b => b.classList.remove('active'));
+                  
+                  // Adicionar classe ativa ao botão clicado
+                  this.classList.add('active');
+                  
+                  // Aqui você implementaria a paginação real
+                  // Por exemplo, carregando um novo conjunto de scripts via AJAX
+              });
+          });
+      });
+  </script>
+</body>
+</html>

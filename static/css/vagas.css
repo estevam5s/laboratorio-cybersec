@@ -1,0 +1,768 @@
+/* Estilos específicos para a página de vagas */
+
+.vagas-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.vagas-header h2 {
+  font-size: 2.2rem;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+}
+
+.vagas-header p {
+  color: #666;
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Filtros */
+.filter-container {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.filter-container span {
+  font-weight: 600;
+  margin-right: 10px;
+  color: var(--dark-color);
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.filter-btn {
+  background-color: #eee;
+  border: none;
+  padding: 8px 15px;
+  margin: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  color: #555;
+}
+
+.filter-btn:hover {
+  background-color: #ddd;
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Seções de vagas por nível */
+.vagas-section {
+  margin-bottom: 50px;
+}
+
+.nivel-heading {
+  font-size: 1.8rem;
+  color: var(--dark-color);
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--primary-color);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.nivel-heading i {
+  margin-right: 15px;
+  color: var(--primary-color);
+  font-size: 1.6rem;
+}
+
+.nivel-heading .badge {
+  margin-left: 15px;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #666;
+}
+
+/* Grid de vagas */
+.vagas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+/* Cards de vagas */
+.vaga-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.vaga-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.vaga-header {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.vaga-title {
+  flex: 1;
+}
+
+.vaga-title h4 {
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  margin-bottom: 5px;
+}
+
+.empresa {
+  color: #666;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.empresa i {
+  margin-right: 5px;
+  color: #888;
+}
+
+.vaga-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vaga-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.vaga-tag i {
+  margin-right: 5px;
+}
+
+.tipo-remoto {
+  background-color: rgba(0, 184, 148, 0.1);
+  color: var(--primary-color);
+}
+
+.tipo-hibrido {
+  background-color: rgba(9, 132, 227, 0.1);
+  color: var(--secondary-color);
+}
+
+.tipo-presencial {
+  background-color: rgba(162, 155, 254, 0.1);
+  color: #a29bfe;
+}
+
+.tipo-clt {
+  background-color: rgba(253, 121, 168, 0.1);
+  color: #fd79a8;
+}
+
+.tipo-pj {
+  background-color: rgba(253, 203, 110, 0.1);
+  color: #fdcb6e;
+}
+
+.vaga-info {
+  padding: 15px 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.vaga-info-item {
+  display: flex;
+  align-items: center;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.vaga-info-item i {
+  margin-right: 8px;
+  color: var(--secondary-color);
+}
+
+.vaga-descricao {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.vaga-descricao p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.vaga-requisitos, .vaga-habilidades, .vaga-diferenciais, .vaga-projetos {
+  padding: 0 20px 15px 20px;
+}
+
+.vaga-requisitos h5, .vaga-habilidades h5, .vaga-diferenciais h5, .vaga-projetos h5 {
+  font-size: 1rem;
+  color: var(--dark-color);
+  margin: 15px 0 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.vaga-requisitos h5 i, .vaga-habilidades h5 i, .vaga-diferenciais h5 i, .vaga-projetos h5 i {
+  margin-right: 8px;
+  color: var(--primary-color);
+}
+
+.vaga-requisitos ul, .vaga-diferenciais ul, .vaga-projetos ul {
+  margin-left: 25px;
+}
+
+.vaga-requisitos li, .vaga-diferenciais li, .vaga-projetos li {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.skill-tag {
+  background-color: rgba(9, 132, 227, 0.1);
+  color: var(--secondary-color);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.vaga-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.aplicar-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.aplicar-btn i {
+  margin-right: 8px;
+}
+
+.aplicar-btn:hover {
+  background-color: #00a082;
+}
+
+.detalhes-btn {
+  background-color: transparent;
+  color: var(--secondary-color);
+  padding: 8px 15px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.detalhes-btn i {
+  margin-left: 5px;
+}
+
+.detalhes-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Mensagem de nenhuma vaga encontrada */
+.no-vagas-message {
+  margin: 50px 0;
+  text-align: center;
+}
+
+.no-vagas-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+.no-vagas-content i {
+  font-size: 3rem;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.no-vagas-content h3 {
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+}
+
+.no-vagas-content p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.reset-filters-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reset-filters-btn:hover {
+  background-color: #0870c0;
+}
+
+/* Newsletter para alertas de vagas */
+.vagas-newsletter {
+  background-color: var(--primary-color);
+  padding: 40px 0;
+  margin: 50px 0;
+  border-radius: 8px;
+}
+
+.newsletter-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+}
+
+.newsletter-text {
+  flex: 1;
+  min-width: 250px;
+}
+
+.newsletter-text h3 {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.newsletter-text h3 i {
+  margin-right: 10px;
+}
+
+.newsletter-text p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.newsletter-form {
+  flex: 1;
+  min-width: 300px;
+}
+
+.newsletter-form form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.subscribe-btn {
+  background-color: var(--dark-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.subscribe-btn i {
+  margin-left: 8px;
+}
+
+.subscribe-btn:hover {
+  background-color: #1e1e1e;
+}
+
+/* Dicas para candidatos */
+.candidate-tips {
+  margin: 50px 0;
+}
+
+.candidate-tips h3 {
+  font-size: 1.8rem;
+  color: var(--dark-color);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.tip-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tip-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgba(0, 184, 148, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+}
+
+.tip-icon i {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+.tip-card h4 {
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  margin-bottom: 15px;
+}
+
+.tip-card p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.tip-link {
+  color: var(--secondary-color);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.tip-link i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.tip-link:hover {
+  color: var(--primary-color);
+}
+
+.tip-link:hover i {
+  transform: translateX(3px);
+}
+
+/* Modal de Detalhes */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 30px 0;
+}
+
+.modal-content {
+  background-color: white;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  animation: modalFade 0.3s ease;
+  position: relative;
+}
+
+@keyframes modalFade {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 20px 25px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 1.6rem;
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.close-modal {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: var(--dark-color);
+}
+
+.modal-body {
+  padding: 25px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modal-empresa {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.modal-vaga-meta {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.modal-vaga-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-vaga-descricao {
+  margin-bottom: 25px;
+}
+
+.modal-vaga-descricao h4 {
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-vaga-descricao p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  padding: 20px 25px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.candidatar-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.candidatar-btn i {
+  margin-right: 8px;
+}
+
+.candidatar-btn:hover {
+  background-color: #00a082;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .vagas-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  .newsletter-content {
+      flex-direction: column;
+      text-align: center;
+  }
+  
+  .tips-grid {
+      grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .vagas-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .vaga-header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .vaga-info {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .nivel-heading {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .nivel-heading .badge {
+      margin-left: 0;
+      margin-top: 5px;
+  }
+  
+  .tips-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+      width: 95%;
+  }
+  
+  .modal-body {
+      max-height: 60vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .filter-buttons {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .filter-btn {
+      width: 100%;
+      max-width: 250px;
+  }
+  
+  .vaga-footer {
+      flex-direction: column;
+      gap: 10px;
+  }
+  
+  .aplicar-btn, .detalhes-btn {
+      width: 100%;
+      justify-content: center;
+  }
+  
+  .form-group {
+      width: 100%;
+  }
+  
+  .subscribe-btn {
+      width: 100%;
+      justify-content: center;
+  }
+}
+
+/* Animações adicionais */
+.vaga-card {
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Aplicar atraso na animação para efeito cascata */
+.vaga-card:nth-child(1) { animation-delay: 0.1s; }
+.vaga-card:nth-child(2) { animation-delay: 0.2s; }
+.vaga-card:nth-child(3) { animation-delay: 0.3s; }
+.vaga-card:nth-child(4) { animation-delay: 0.4s; }
+.vaga-card:nth-child(5) { animation-delay: 0.5s; }
+.vaga-card:nth-child(6) { animation-delay: 0.6s; }

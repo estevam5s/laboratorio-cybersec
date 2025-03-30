@@ -1,0 +1,361 @@
+/* Estilos específicos para a página de Roadmap */
+
+.roadmap-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.roadmap-header h2 {
+  font-size: 2.2rem;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+}
+
+.roadmap-header p {
+  color: #666;
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.roadmap-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+/* Seletor de nível de habilidade */
+.skill-level-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.skill-btn {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.skill-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.skill-btn:hover {
+  color: var(--dark-color);
+}
+
+.skill-btn.active {
+  color: var(--primary-color);
+}
+
+.skill-btn.active::after {
+  width: 100%;
+}
+
+/* Timeline do Roadmap */
+.roadmap-level {
+  display: none;
+}
+
+.roadmap-level.active {
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.roadmap-timeline {
+  position: relative;
+  margin-left: 20px;
+  padding-left: 40px;
+}
+
+.roadmap-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #ddd;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -41px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-content {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+  font-size: 1.4rem;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.timeline-content p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Skills Tags */
+.timeline-skills {
+  margin: 15px 0;
+}
+
+.timeline-skills li {
+  margin-bottom: 20px;
+}
+
+.skill-tag {
+  display: inline-block;
+  background-color: rgba(0, 184, 148, 0.1);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.recommended-labs {
+  margin-top: 10px;
+  background-color: rgba(9, 132, 227, 0.05);
+  padding: 10px;
+  border-radius: 4px;
+  border-left: 3px solid var(--secondary-color);
+}
+
+.recommended-labs strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--dark-color);
+}
+
+.lab-link {
+  display: inline-block;
+  margin-right: 10px;
+  background-color: rgba(9, 132, 227, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--secondary-color);
+  transition: all 0.3s ease;
+  margin-bottom: 5px;
+}
+
+.lab-link:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  text-decoration: none;
+}
+
+/* Recursos para Estudo */
+.resources-block {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.resources-block h4 {
+  font-size: 1.1rem;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+}
+
+.resources-block ul {
+  margin-left: 5px;
+}
+
+.resources-block li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.resources-block li i {
+  color: var(--secondary-color);
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
+}
+
+.resources-block a {
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+.resources-block a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Conclusão */
+.roadmap-conclusion {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.roadmap-conclusion h3 {
+  font-size: 1.6rem;
+  color: var(--dark-color);
+  margin-bottom: 20px;
+}
+
+.roadmap-conclusion p {
+  color: #666;
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.roadmap-conclusion ul {
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.roadmap-conclusion li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.roadmap-conclusion li:before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.cta-button {
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.cta-button.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.cta-button.primary:hover {
+  background-color: #00a082;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.2);
+}
+
+.cta-button.secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.cta-button.secondary:hover {
+  background-color: #0870c0;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(9, 132, 227, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .roadmap-timeline {
+      margin-left: 10px;
+      padding-left: 30px;
+  }
+  
+  .timeline-dot {
+      left: -31px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-level-selector {
+      flex-wrap: wrap;
+  }
+  
+  .skill-btn {
+      margin: 5px;
+  }
+  
+  .cta-buttons {
+      flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .roadmap-content,
+  .roadmap-conclusion {
+      padding: 15px;
+  }
+  
+  .timeline-content {
+      padding: 15px;
+  }
+  
+  .roadmap-header h2 {
+      font-size: 1.8rem;
+  }
+}

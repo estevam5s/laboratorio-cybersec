@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ lab.titulo }} - CyberLab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lab.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberLab</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/sobre">Sobre o Laboratório</a></li>
+                    <li><a href="/roadmap">Roadmap</a></li>
+                    <li><a href="/">Laboratórios</a></li>
+                    <li><a href="/scripts">Scripts</a></li>
+                    <li><a href="/vagas">Vagas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="lab-header">
+                <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar para Laboratórios</a>
+                <h2 id="labTitle">{{ lab.titulo }}</h2>
+                <div class="lab-meta-info">
+                    <span id="labCategory" class="category-badge category-{{ lab.categoria|lower|replace(' ', '-') }}">{{ lab.categoria }}</span>
+                    <span><i class="fas fa-clock"></i> Duração: <span id="labDuracao">{{ lab.duracao }}</span></span>
+                    <span><i class="fas fa-tasks"></i> Tarefas: <span id="labTarefas">{{ lab.tarefas }}</span></span>
+                </div>
+                <div id="labTags" class="lab-tags">
+                    {% if lab.video %}
+                    <span class="lab-tag video"><i class="fas fa-video"></i> Vídeo</span>
+                    {% endif %}
+                    {% if lab.desafio_timer %}
+                    <span class="lab-tag desafio"><i class="fas fa-stopwatch"></i> Desafio com Timer</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="lab-content">
+                <!-- Timer para laboratórios com desafio -->
+                {% if lab.desafio_timer %}
+                <div class="timer-container">
+                    <div class="timer-display">
+                        <span id="minutes">30</span>:<span id="seconds">00</span>
+                    </div>
+                    <div class="timer-controls">
+                        <button id="startTimer" class="timer-btn start"><i class="fas fa-play"></i> Iniciar Timer</button>
+                        <button id="pauseTimer" class="timer-btn pause" disabled><i class="fas fa-pause"></i> Pausar</button>
+                        <button id="resetTimer" class="timer-btn reset" disabled><i class="fas fa-redo-alt"></i> Reiniciar</button>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="lab-description">
+                    <h3>Descrição</h3>
+                    <p id="labDescricao">{{ lab.descricao }}</p>
+                </div>
+                
+                <!-- Seção de vídeo para laboratórios com tag de vídeo -->
+                {% if lab.video %}
+                <div class="video-tutorial-section">
+                    <h3><i class="fas fa-video"></i> Tutorial em Vídeo</h3>
+                    <div class="video-container">
+                        <iframe width="100%" height="315" 
+                            src="https://www.youtube.com/embed/videoseries?list=PLKZ1xRF1MhWKIK_BGHdHbu5oD7qrXWYWV" 
+                            title="Tutorial de {{ lab.titulo }}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-description">Este tutorial demonstra as técnicas abordadas neste laboratório de {{ lab.categoria }}.</p>
+                </div>
+                {% endif %}
+                
+                <div class="lab-sections">
+                    <div class="lab-main-content">
+                        <div class="instructions-panel">
+                            <h3>Instruções</h3>
+                            <div class="instructions-content">
+                                <div class="instruction-step active" data-step="1">
+                                    <h4>Passo 1: Preparação do Ambiente</h4>
+                                    <p>Neste laboratório, você precisa instalar os pacotes necessários usando o terminal.</p>
+                                    <p>Para isso, use o terminal integrado abaixo e execute o comando para atualizar os repositórios:</p>
+                                    <div class="code-block">
+                                        <pre><code>apt-get update</code></pre>
+                                        <button class="copy-btn" data-code="apt-get update"><i class="fas fa-copy"></i></button>
+                                    </div>
+                                    <p>Em seguida, instale os pacotes necessários para este laboratório:</p>
+                                    
+                                    {% for pacote in lab.pacotes %}
+                                    <div class="code-block">
+                                        <pre><code>apt-get install {{ pacote }}</code></pre>
+                                        <button class="copy-btn" data-code="apt-get install {{ pacote }}"><i class="fas fa-copy"></i></button>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                    <div class="instruction-tip">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <p>Dica: Você pode ver a lista completa de pacotes disponíveis usando o comando <code>apt-cache search nome_pacote</code>.</p>
+                                    </div>
+                                    <div class="task-completion">
+                                        <button class="task-complete-btn" data-step="1">Marcar como Concluído</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="instruction-step" data-step="2">
+                                    <h4>Passo 2: Explorando as Ferramentas</h4>
+                                    <p>Agora que você instalou os pacotes necessários, vamos explorar suas funcionalidades:</p>
+                                    
+                                    {% if 'nmap' in lab.pacotes %}
+                                    <div class="tool-section">
+                                        <h5>Usando o Nmap para reconhecimento</h5>
+                                        <p>Execute um scan básico com Nmap:</p>
+                                        <div class="code-block">
+                                            <pre><code>nmap -sV 192.168.1.1</code></pre>
+                                            <button class="copy-btn" data-code="nmap -sV 192.168.1.1"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if 'hydra' in lab.pacotes %}
+                                    <div class="tool-section">
+                                        <h5>Usando o Hydra para testes de força bruta</h5>
+                                        <p>Teste uma conexão SSH:</p>
+                                        <div class="code-block">
+                                            <pre><code>hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.1</code></pre>
+                                            <button class="copy-btn" data-code="hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.1"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if 'wireshark' in lab.pacotes %}
+                                    <div class="tool-section">
+                                        <h5>Iniciando o Wireshark para captura de pacotes</h5>
+                                        <p>Inicie o Wireshark via terminal:</p>
+                                        <div class="code-block">
+                                            <pre><code>wireshark</code></pre>
+                                            <button class="copy-btn" data-code="wireshark"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if 'metasploit' in lab.pacotes %}
+                                    <div class="tool-section">
+                                        <h5>Usando o Framework Metasploit</h5>
+                                        <p>Inicie o console do Metasploit:</p>
+                                        <div class="code-block">
+                                            <pre><code>msfconsole</code></pre>
+                                            <button class="copy-btn" data-code="msfconsole"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <div class="instruction-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <p>Atenção: Em ambientes reais, sempre obtenha permissão antes de realizar qualquer tipo de teste de penetração ou análise de segurança.</p>
+                                    </div>
+                                    <div class="task-completion">
+                                        <button class="task-complete-btn" data-step="2">Marcar como Concluído</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="instruction-step" data-step="3">
+                                    <h4>Passo 3: Atividade Prática</h4>
+                                    <p>Agora que você está familiarizado com as ferramentas, vamos realizar uma atividade prática:</p>
+                                    
+                                    {% if lab.categoria == 'Kali Linux' %}
+                                    <div class="activity-section">
+                                        <p>Explore os diretórios do sistema e identifique onde ficam armazenadas as ferramentas de segurança:</p>
+                                        <div class="code-block">
+                                            <pre><code>ls -la /usr/share/</code></pre>
+                                            <button class="copy-btn" data-code="ls -la /usr/share/"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if lab.categoria == 'Scanning' %}
+                                    <div class="activity-section">
+                                        <p>Realize um scan de portas em um host específico e identifique serviços vulneráveis:</p>
+                                        <div class="code-block">
+                                            <pre><code>nmap -sV --script vuln 192.168.1.1</code></pre>
+                                            <button class="copy-btn" data-code="nmap -sV --script vuln 192.168.1.1"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if lab.categoria == 'Redes' %}
+                                    <div class="activity-section">
+                                        <p>Capture e analise o tráfego de rede:</p>
+                                        <div class="code-block">
+                                            <pre><code>tcpdump -i eth0 -n</code></pre>
+                                            <button class="copy-btn" data-code="tcpdump -i eth0 -n"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if lab.categoria == 'Web' %}
+                                    <div class="activity-section">
+                                        <p>Realize um scan em uma aplicação web:</p>
+                                        <div class="code-block">
+                                            <pre><code>nikto -h http://192.168.1.100</code></pre>
+                                            <button class="copy-btn" data-code="nikto -h http://192.168.1.100"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if lab.categoria == 'Criptografia' %}
+                                    <div class="activity-section">
+                                        <p>Tente quebrar um hash com hashcat:</p>
+                                        <div class="code-block">
+                                            <pre><code>echo "5f4dcc3b5aa765d61d8327deb882cf99" > hash.txt</code></pre>
+                                            <button class="copy-btn" data-code="echo '5f4dcc3b5aa765d61d8327deb882cf99' > hash.txt"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                        <div class="code-block">
+                                            <pre><code>hashcat -m 0 -a 0 hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+                                            <button class="copy-btn" data-code="hashcat -m 0 -a 0 hash.txt /usr/share/wordlists/rockyou.txt"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <div class="instruction-tip">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <p>Dica: Documente sempre seus resultados. É uma boa prática em testes de penetração manter registros detalhados de suas descobertas.</p>
+                                    </div>
+                                    
+                                    <div class="task-completion">
+                                        <button class="task-complete-btn" data-step="3">Marcar como Concluído</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="navigation-buttons">
+                                <button id="prevBtn" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                                <div class="steps-indicator">
+                                    <span class="current-step">1</span>/<span class="total-steps">3</span>
+                                </div>
+                                <button id="nextBtn">Próximo <i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-sidebar">
+                        <div class="progress-panel">
+                            <h3>Progresso</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-text">0% Concluído</div>
+                            
+                            <div class="tasks-list">
+                                <div class="task-item" data-step="1">
+                                    <span class="task-check"><i class="far fa-circle"></i></span>
+                                    <span class="task-name">Preparação do Ambiente</span>
+                                </div>
+                                <div class="task-item" data-step="2">
+                                    <span class="task-check"><i class="far fa-circle"></i></span>
+                                    <span class="task-name">Explorando as Ferramentas</span>
+                                </div>
+                                <div class="task-item" data-step="3">
+                                    <span class="task-check"><i class="far fa-circle"></i></span>
+                                    <span class="task-name">Atividade Prática</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resources-panel">
+                            <h3>Recursos Adicionais</h3>
+                            <ul class="resources-list" id="resourcesList">
+                                <!-- Recursos serão adicionados dinamicamente pelo JS -->
+                            </ul>
+                        </div>
+                        
+                        <!-- Terminal integrado no laboratório -->
+                        <div class="terminal-panel">
+                            <h3>Terminal Kali Linux</h3>
+                            <div class="terminal">
+                                <div class="terminal-output" id="terminalOutput">
+                                    <p class="welcome-message">Bem-vindo ao Terminal do Laboratório!</p>
+                                    <p class="welcome-message">Digite 'help' para ver comandos disponíveis.</p>
+                                </div>
+                                <div class="terminal-input-line">
+                                    <span class="prompt">kali@cyberlab:~$</span>
+                                    <input type="text" id="terminalInput" autofocus>
+                                </div>
+                            </div>
+                            <div class="terminal-info">
+                                <p><i class="fas fa-info-circle"></i> Este terminal está configurado especificamente para este laboratório.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lab-completion">
+                    <div class="completion-message hidden">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Parabéns! Você concluiu este laboratório!</h3>
+                        <p>Continue explorando outros laboratórios para expandir seus conhecimentos em cyber segurança.</p>
+                        <div class="completion-buttons">
+                            <a href="/" class="btn primary-btn">Ver Todos os Laboratórios</a>
+                            <a href="/roadmap" class="btn secondary-btn">Consultar Roadmap</a>
+                            <button class="btn secondary-btn" id="resetLabBtn">Reiniciar Este Laboratório</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CyberLab - Laboratório de Cyber Segurança</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para garantir que a página seja carregada no topo
+        window.scrollTo(0, 0);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup da navegação entre passos
+            setupNavigation();
+            
+            // Configurar botões de conclusão de tarefas
+            setupTaskCompletion();
+            
+            // Configurar botões de cópia de código
+            setupCodeCopy();
+            
+            // Configurar navegação na lista de tarefas da barra lateral
+            setupTaskNavigation();
+            
+            // Configurar botão de reset do laboratório
+            setupLabReset();
+            
+            // Configurar terminal
+            setupTerminal();
+            
+            // Adicionar recursos específicos por categoria
+            setupResources();
+            
+            // Configurar o timer se o laboratório tiver desafio
+            setupTimer();
+            
+            // Função para adicionar recursos específicos por categoria
+            function setupResources() {
+                const labCategory = document.getElementById('labCategory').textContent;
+                const resourcesList = document.getElementById('resourcesList');
+                
+                // Objeto com links para documentação por categoria
+                const documentationLinks = {
+                    'Kali Linux': 'https://www.kali.org/docs/',
+                    'Scanning': 'https://nmap.org/book/man.html',
+                    'Redes': 'https://www.wireshark.org/docs/',
+                    'Análise': 'https://www.wireshark.org/docs/wsug_html/',
+                    'Web': 'https://portswigger.net/burp/documentation',
+                    'Criptografia': 'https://www.openssl.org/docs/',
+                    'Social': 'https://www.social-engineer.org/framework/general-discussion/',
+                    'Senhas': 'https://hashcat.net/wiki/'
+                };
+                
+                // Recursos básicos
+                const basicResources = [
+                    {
+                        icon: 'fas fa-file-pdf',
+                        title: `Guia de Referência para ${labCategory}`,
+                        url: '#'
+                    },
+                    {
+                        icon: 'fas fa-video',
+                        title: `Vídeo Tutorial: ${document.getElementById('labTitle').textContent}`,
+                        url: '#'
+                    }
+                ];
+                
+                // Adicionar documentação oficial específica da categoria
+                if (documentationLinks[labCategory]) {
+                    basicResources.push({
+                        icon: 'fas fa-book',
+                        title: `Documentação Oficial: ${labCategory}`,
+                        url: documentationLinks[labCategory]
+                    });
+                }
+                
+                // Adicionar todos os recursos
+                basicResources.forEach(resource => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <i class="${resource.icon}"></i>
+                        <a href="${resource.url}" class="resource-link" target="_blank">${resource.title}</a>
+                    `;
+                    resourcesList.appendChild(li);
+                });
+            }
+            
+            // Configurar o timer para desafios com tempo
+            function setupTimer() {
+                const timerContainer = document.querySelector('.timer-container');
+                if (!timerContainer) return;
+                
+                const minutesDisplay = document.getElementById('minutes');
+                const secondsDisplay = document.getElementById('seconds');
+                const startBtn = document.getElementById('startTimer');
+                const pauseBtn = document.getElementById('pauseTimer');
+                const resetBtn = document.getElementById('resetTimer');
+                
+                let totalSeconds = 30 * 60; // 30 minutos em segundos
+                let timerInterval;
+                let timerRunning = false;
+                
+                // Função para atualizar a exibição do timer
+                function updateTimerDisplay() {
+                    const minutes = Math.floor(totalSeconds / 60);
+                    const seconds = totalSeconds % 60;
+                    
+                    minutesDisplay.textContent = minutes.toString().padStart(2, '0');
+                    secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+                    
+                    // Se o timer chegar a zero, finalizar o desafio
+                    if (totalSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        
+                        // Adicionar classe para indicar que o tempo acabou
+                        timerContainer.classList.add('time-up');
+                        
+                        // Mostrar alerta e redirecionar para a página de laboratórios
+                        setTimeout(() => {
+                            alert('Tempo esgotado! O desafio foi finalizado.');
+                            window.location.href = '/';
+                        }, 1000);
+                    }
+                }
+                
+                // Iniciar o timer
+                startBtn.addEventListener('click', () => {
+                    if (!timerRunning) {
+                        timerInterval = setInterval(() => {
+                            totalSeconds--;
+                            updateTimerDisplay();
+                        }, 1000);
+                        
+                        timerRunning = true;
+                        startBtn.disabled = true;
+                        pauseBtn.disabled = false;
+                        resetBtn.disabled = false;
+                        
+                        // Adicionar classe para indicar que o timer está rodando
+                        timerContainer.classList.add('timer-running');
+                    }
+                });
+                
+                // Pausar o timer
+                pauseBtn.addEventListener('click', () => {
+                    if (timerRunning) {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        startBtn.disabled = false;
+                        pauseBtn.disabled = true;
+                        
+                        // Remover a classe de timer rodando
+                        timerContainer.classList.remove('timer-running');
+                    }
+                });
+                
+                // Reiniciar o timer
+                resetBtn.addEventListener('click', () => {
+                    clearInterval(timerInterval);
+                    timerRunning = false;
+                    totalSeconds = 30 * 60;
+                    updateTimerDisplay();
+                    
+                    startBtn.disabled = false;
+                    pauseBtn.disabled = true;
+                    resetBtn.disabled = true;
+                    
+                    // Remover as classes de estilo
+                    timerContainer.classList.remove('timer-running');
+                    timerContainer.classList.remove('time-up');
+                });
+            }
+            
+            function setupNavigation() {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const steps = document.querySelectorAll('.instruction-step');
+                const currentStepEl = document.querySelector('.current-step');
+                const totalStepsEl = document.querySelector('.total-steps');
+                
+                let currentStep = 1;
+                const totalSteps = steps.length;
+                totalStepsEl.textContent = totalSteps;
+                
+                // Função para atualizar a visualização dos passos
+                function updateStepView() {
+                    steps.forEach(step => step.classList.remove('active'));
+                    document.querySelector(`.instruction-step[data-step="${currentStep}"]`).classList.add('active');
+                    currentStepEl.textContent = currentStep;
+                    
+                    // Atualizar estado dos botões
+                    prevBtn.disabled = currentStep === 1;
+                    nextBtn.disabled = currentStep === totalSteps;
+                    
+                    // Atualizar item ativo na lista de tarefas lateral
+                    document.querySelectorAll('.task-item').forEach(item => item.classList.remove('active'));
+                    document.querySelector(`.task-item[data-step="${currentStep}"]`).classList.add('active');
+                }
+                
+                // Botão anterior
+                prevBtn.addEventListener('click', () => {
+                    if (currentStep > 1) {
+                        currentStep--;
+                        updateStepView();
+                    }
+                });
+                
+                // Botão próximo
+                nextBtn.addEventListener('click', () => {
+                    if (currentStep < totalSteps) {
+                        currentStep++;
+                        updateStepView();
+                    }
+                });
+                
+                // Inicializar view
+                updateStepView();
+            }
+            
+            function setupTaskCompletion() {
+                const completeButtons = document.querySelectorAll('.task-complete-btn');
+                const taskItems = document.querySelectorAll('.task-item');
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-text');
+                const completionMessage = document.querySelector('.completion-message');
+                
+                // Recuperar tarefas concluídas do armazenamento local (se existir)
+                const labId = window.location.pathname.split('/lab/')[1] || '1';
+                const storageKey = `lab_${labId}_progress`;
+                let completedTasks = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let installedPackages = JSON.parse(localStorage.getItem(`lab_${labId}_packages`)) || [];
+                
+                // Aplicar estado inicial baseado nas tarefas já concluídas
+                updateTasksState();
+                
+                completeButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const step = button.getAttribute('data-step');
+                        
+                        // Marcar tarefa como concluída se ainda não estiver
+                        if (!completedTasks.includes(step)) {
+                            completedTasks.push(step);
+                            localStorage.setItem(storageKey, JSON.stringify(completedTasks));
+                        }
+                        
+                        // Atualizar estado das tarefas
+                        updateTasksState();
+                        
+                        // Avançar para próxima tarefa automaticamente
+                        const nextBtn = document.getElementById('nextBtn');
+                        if (!nextBtn.disabled) {
+                            nextBtn.click();
+                        }
+                    });
+                });
+                
+                function updateTasksState() {
+                    // Atualizar indicadores visuais das tarefas concluídas
+                    taskItems.forEach(item => {
+                        const step = item.getAttribute('data-step');
+                        const checkIcon = item.querySelector('.task-check i');
+                        
+                        if (completedTasks.includes(step)) {
+                            item.classList.add('completed');
+                            checkIcon.className = 'fas fa-check-circle';
+                        } else {
+                            item.classList.remove('completed');
+                            checkIcon.className = 'far fa-circle';
+                        }
+                    });
+                    
+                    // Atualizar barra de progresso
+                    const progress = (completedTasks.length / taskItems.length) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    progressText.textContent = `${Math.round(progress)}% Concluído`;
+                    
+                    // Mostrar mensagem de conclusão se todas as tarefas estiverem concluídas
+                    if (completedTasks.length === taskItems.length) {
+                        completionMessage.classList.remove('hidden');
+                    } else {
+                        completionMessage.classList.add('hidden');
+                    }
+                }
+            }
+            
+            function setupCodeCopy() {
+                const copyButtons = document.querySelectorAll('.copy-btn');
+                
+                copyButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const code = button.getAttribute('data-code');
+                        
+                        // Copiar para a área de transferência
+                        navigator.clipboard.writeText(code).then(() => {
+                            // Feedback visual da cópia
+                            button.innerHTML = '<i class="fas fa-check"></i>';
+                            
+                            // Restaurar ícone original após um tempo
+                            setTimeout(() => {
+                                button.innerHTML = '<i class="fas fa-copy"></i>';
+                            }, 2000);
+                            
+                            // Inserir comando automaticamente no terminal
+                            const terminalInput = document.getElementById('terminalInput');
+                            
+                            if (terminalInput) {
+                                terminalInput.value = code;
+                                terminalInput.focus();
+                                
+                                // Simular pressionar Enter para executar o comando
+                                const enterEvent = new KeyboardEvent('keydown', {
+                                    key: 'Enter',
+                                    code: 'Enter',
+                                    keyCode: 13,
+                                    which: 13,
+                                    bubbles: true
+                                });
+                                terminalInput.dispatchEvent(enterEvent);
+                            }
+                        });
+                    });
+                });
+            }
+            
+            function setupTaskNavigation() {
+                const taskItems = document.querySelectorAll('.task-item');
+                
+                taskItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const step = item.getAttribute('data-step');
+                        const steps = document.querySelectorAll('.instruction-step');
+                        const currentStepEl = document.querySelector('.current-step');
+                        
+                        // Atualizar navegação para o passo selecionado
+                        steps.forEach(stepEl => {
+                            stepEl.classList.remove('active');
+                        });
+                        
+                        document.querySelector(`.instruction-step[data-step="${step}"]`).classList.add('active');
+                        currentStepEl.textContent = step;
+                        
+                        // Atualizar estado dos botões de navegação
+                        const prevBtn = document.getElementById('prevBtn');
+                        const nextBtn = document.getElementById('nextBtn');
+                        const totalSteps = steps.length;
+                        
+                        prevBtn.disabled = step == 1;
+                        nextBtn.disabled = step == totalSteps;
+                        
+                        // Atualizar item ativo na lista de tarefas
+                        taskItems.forEach(taskEl => {
+                            taskEl.classList.remove('active');
+                        });
+                        item.classList.add('active');
+                    });
+                });
+            }
+            
+            function setupLabReset() {
+                const resetBtn = document.getElementById('resetLabBtn');
+                
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        if (confirm('Tem certeza que deseja reiniciar este laboratório? Todo o progresso será perdido.')) {
+                            // Limpar progresso salvo
+                            const labId = window.location.pathname.split('/lab/')[1] || '1';
+                            const storageKey = `lab_${labId}_progress`;
+                            localStorage.removeItem(storageKey);
+                            localStorage.removeItem(`lab_${labId}_packages`);
+                            
+                            // Recarregar a página
+                            window.location.reload();
+                        }
+                    });
+                }
+            }
+            
+            function setupTerminal() {
+                const terminalInput = document.getElementById('terminalInput');
+                const terminalOutput = document.getElementById('terminalOutput');
+                
+                if (terminalInput && terminalOutput) {
+                    terminalInput.addEventListener('keydown', async function(e) {
+                        if (e.key === 'Enter') {
+                            const command = terminalInput.value.trim();
+                            if (command === '') return;
+                            
+                            // Adicionar comando à saída
+                            const commandLine = document.createElement('p');
+                            commandLine.innerHTML = `<span class="prompt">kali@cyberlab:~$</span> ${command}`;
+                            terminalOutput.appendChild(commandLine);
+                            
+                            // Limpar input
+                            terminalInput.value = '';
+                            
+                            // Processar comando com a API ou simulação local
+                            try {
+                                const labId = window.location.pathname.split('/lab/')[1] || '1';
+                                
+                                const response = await fetch('/api/terminal', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ 
+                                        command: command,
+                                        lab_id: labId
+                                    })
+                                });
+                                
+                                const data = await response.json();
+                                
+                                // Comando para limpar o terminal
+                                if (command === 'clear' || data.output === 'clear') {
+                                    terminalOutput.innerHTML = '';
+                                    return;
+                                }
+                                
+                                // Adicionar resultado à saída
+                                const resultLine = document.createElement('p');
+                                resultLine.textContent = data.output;
+                                terminalOutput.appendChild(resultLine);
+                                
+                                // Se um pacote foi instalado, salvar no localStorage
+                                if (data.package_installed && command.startsWith('apt-get install ')) {
+                                    const packageName = command.split(' ').pop();
+                                    const installedPackages = JSON.parse(localStorage.getItem(`lab_${labId}_packages`)) || [];
+                                    if (!installedPackages.includes(packageName)) {
+                                        installedPackages.push(packageName);
+                                        localStorage.setItem(`lab_${labId}_packages`, JSON.stringify(installedPackages));
+                                    }
+                                }
+                                
+                                // Se um pacote foi removido, remover do localStorage
+                                if (data.package_removed && command.startsWith('apt-get remove ')) {
+                                    const packageName = command.split(' ').pop();
+                                    let installedPackages = JSON.parse(localStorage.getItem(`lab_${labId}_packages`)) || [];
+                                    installedPackages = installedPackages.filter(pkg => pkg !== packageName);
+                                    localStorage.setItem(`lab_${labId}_packages`, JSON.stringify(installedPackages));
+                                }
+                                
+                            } catch (error) {
+                                console.error('Erro ao processar comando:', error);
+                                
+                                // Simulação de resposta em caso de falha de conexão
+                                simularComandoTerminal(command, terminalOutput);
+                            }
+                            
+                            // Rolar para o final do terminal
+                            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                        }
+                    });
+                    
+                    // Função para simular comandos do terminal localmente (fallback)
+                    function simularComandoTerminal(command, output) {
+                        const labId = window.location.pathname.split('/lab/')[1] || '1';
+                        
+                        // Simulação básica de comandos
+                        if (command.startsWith('apt-get install ')) {
+                            const package = command.split(' ').pop();
+                            const resultLine = document.createElement('p');
+                            resultLine.textContent = `Lendo listas de pacotes... Pronto\nConstruindo árvore de dependências... Pronto\nLendo informações de estado... Pronto\nOs seguintes pacotes NOVOS serão instalados:\n  ${package}\n0 atualizados, 1 novos instalados, 0 a serem removidos e 0 não atualizados.`;
+                            output.appendChild(resultLine);
+                            
+                            // Simular animação de instalação
+                            setTimeout(() => {
+                                const installLine = document.createElement('p');
+                                installLine.textContent = `Baixados 2.505 kB em 1s (2.505 kB/s)\nSelecionando ${package} previamente não selecionado.\nPreparando para desempacotar ./${package}.deb ...`;
+                                output.appendChild(installLine);
+                                output.scrollTop = output.scrollHeight;
+                                
+                                setTimeout(() => {
+                                    const completeLine = document.createElement('p');
+                                    completeLine.textContent = `Desempacotando ${package} (1:2.0-1) ...\nConfigurando ${package} (1:2.0-1) ...\nProcessando gatilhos para man-db (2.10.2-1) ...`;
+                                    output.appendChild(completeLine);
+                                    output.scrollTop = output.scrollHeight;
+                                    
+                                    // Salvar pacote instalado
+                                    const installedPackages = JSON.parse(localStorage.getItem(`lab_${labId}_packages`)) || [];
+                                    if (!installedPackages.includes(package)) {
+                                        installedPackages.push(package);
+                                        localStorage.setItem(`lab_${labId}_packages`, JSON.stringify(installedPackages));
+                                    }
+                                }, 1500);
+                            }, 1000);
+                            
+                            return;
+                        } else if (command.startsWith('apt-get remove ')) {
+                            const package = command.split(' ').pop();
+                            const resultLine = document.createElement('p');
+                            resultLine.textContent = `Lendo listas de pacotes... Pronto\nConstruindo árvore de dependências... Pronto\nLendo informações de estado... Pronto\nOs seguintes pacotes serão REMOVIDOS:\n  ${package}\n0 atualizados, 0 novos instalados, 1 a serem removidos e 0 não atualizados.`;
+                            output.appendChild(resultLine);
+                            
+                            setTimeout(() => {
+                                const removeLine = document.createElement('p');
+                                removeLine.textContent = `Removendo ${package} (1:2.0-1) ...\nProcessando gatilhos para man-db (2.10.2-1) ...`;
+                                output.appendChild(removeLine);
+                                output.scrollTop = output.scrollHeight;
+                                
+                                // Remover pacote da lista de instalados
+                                let installedPackages = JSON.parse(localStorage.getItem(`lab_${labId}_packages`)) || [];
+                                installedPackages = installedPackages.filter(pkg => pkg !== package);
+                                localStorage.setItem(`lab_${labId}_packages`, JSON.stringify(installedPackages));
+                            }, 1000);
+                            
+                            return;
+                        }
+                        
+                        // Comandos básicos
+                        const commandResponses = {
+                            'ls': 'documentos  ferramentas  logs  scripts',
+                            'pwd': '/home/kali',
+                            'help': 'Comandos disponíveis: ls, cd, pwd, help, clear, apt-get install, apt-get update, apt-get remove',
+                            'apt-get update': 'Atingido:1 http://kali.download/kali kali-rolling InRelease\nBaixados 6.450 kB em 3s (2.150 kB/s)\nLendo listas de pacotes... Pronto',
+                            'ifconfig': 'eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\n        inet 192.168.1.5  netmask 255.255.255.0  broadcast 192.168.1.255'
+                        };
+                        
+                        // Respostas para comandos dinâmicos
+                        if (command === 'clear') {
+                            output.innerHTML = '';
+                            return;
+                        } else if (command.startsWith('cd ')) {
+                            const dir = command.slice(3);
+                            const resultLine = document.createElement('p');
+                            resultLine.textContent = `Diretório alterado para ${dir}`;
+                            output.appendChild(resultLine);
+                            return;
+                        } else if (command.startsWith('nmap ')) {
+                            const target = command.split(' ')[1] || 'localhost';
+                            const resultLine = document.createElement('p');
+                            resultLine.textContent = `Iniciando Nmap 7.92...\nScanning ${target}...\nDiscovered open port: 80/tcp (HTTP)\nDiscovered open port: 443/tcp (HTTPS)\nDiscovered open port: 22/tcp (SSH)\nNmap done: 1 IP address scanned in 2.34 seconds`;
+                            output.appendChild(resultLine);
+                            return;
+                        }
+                        
+                        // Verificar comandos conhecidos
+                        const response = commandResponses[command] || `Comando '${command}' não reconhecido. Digite 'help' para ver os comandos disponíveis.`;
+                        const resultLine = document.createElement('p');
+                        resultLine.textContent = response;
+                        output.appendChild(resultLine);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

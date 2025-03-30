@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap de Cyber Segurança - CyberLab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/roadmap.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberLab</h1>
+            </div>
+            <nav>
+                <ul>
+                  <li><a href="/sobre">Sobre o Laboratório</a></li>
+                  <li><a href="/roadmap" class="active">Roadmap</a></li>
+                  <li><a href="/">Laboratórios</a></li>
+                  <li><a href="/scripts">Scripts</a></li>
+                  <li><a href="/vagas">Vagas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="roadmap-header">
+                <h2>Roadmap de Cyber Segurança</h2>
+                <p>Um guia passo a passo para se tornar um profissional de cyber segurança, desde iniciante até especialista</p>
+            </section>
+
+            <section class="roadmap-content">
+                <div class="skill-level-selector">
+                    <button class="skill-btn active" data-level="iniciante">Iniciante</button>
+                    <button class="skill-btn" data-level="intermediario">Intermediário</button>
+                    <button class="skill-btn" data-level="avancado">Avançado</button>
+                    <button class="skill-btn" data-level="especialista">Especialista</button>
+                </div>
+
+                <!-- Roadmap Iniciante -->
+                <div class="roadmap-level active" id="iniciante">
+                    <div class="roadmap-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Fundamentos de TI e Redes</h3>
+                                <p>Comece com conhecimentos básicos de sistemas operacionais, redes e hardware.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Sistema Operacional</span>
+                                        <p>Aprenda a usar Windows, Linux e macOS. Foque especialmente em Linux (Ubuntu ou Kali).</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/1" class="lab-link">Introdução ao Kali Linux</a>
+                                            <a href="/lab/2" class="lab-link">Ferramentas de Informação do Sistema Kali</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Redes</span>
+                                        <p>Entenda conceitos básicos de redes: IP, DNS, TCP/UDP, subrede, firewall.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/7" class="lab-link">Fundamentos de Segurança em Redes</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Hardware</span>
+                                        <p>Tenha conhecimento básico de componentes de computador e como eles funcionam.</p>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-book"></i> <a href="https://linuxjourney.com/" target="_blank">Linux Journey</a></li>
+                                        <li><i class="fas fa-graduation-cap"></i> <a href="https://www.coursera.org/learn/computer-networking" target="_blank">Coursera: Fundamentos de Redes</a></li>
+                                        <li><i class="fas fa-video"></i> <a href="https://www.youtube.com/playlist?list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd" target="_blank">Professor Messer: CompTIA Network+</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Fundamentos de Segurança</h3>
+                                <p>Entenda os conceitos básicos de segurança da informação.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Princípios de Segurança</span>
+                                        <p>Confidencialidade, Integridade, Disponibilidade, Autenticação, Autorização.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Tipos de Ameaças</span>
+                                        <p>Malware, Phishing, Social Engineering, DDoS, Ataques de Senha.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/19" class="lab-link">Engenharia Social</a>
+                                            <a href="/lab/22" class="lab-link">Exploração de Senhas com Hydra</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Ferramentas Básicas</span>
+                                        <p>Firewall, Antivírus, Gerenciadores de Senha, VPN.</p>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-book"></i> <a href="https://www.cybrary.it/course/introduction-cyber-security/" target="_blank">Cybrary: Introdução à Cyber Segurança</a></li>
+                                        <li><i class="fas fa-award"></i> <a href="https://www.comptia.org/certifications/security" target="_blank">Certificação: CompTIA Security+</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Programação Básica</h3>
+                                <p>Aprenda conceitos básicos de programação para automatizar tarefas.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Python</span>
+                                        <p>Linguagem ideal para iniciantes e muito usada em segurança e automação.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Bash/Shell</span>
+                                        <p>Automação em sistemas Linux/Unix e manipulação de texto.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">HTML e JavaScript</span>
+                                        <p>Entendimento básico para análise de vulnerabilidades web.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/13" class="lab-link">Testes de Penetração Web</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-code"></i> <a href="https://www.codecademy.com/learn/learn-python-3" target="_blank">Codecademy: Python</a></li>
+                                        <li><i class="fas fa-terminal"></i> <a href="https://linuxjourney.com/lesson/the-shell" target="_blank">Linux Journey: Bash</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Primeiras Ferramentas Práticas</h3>
+                                <p>Familiarize-se com ferramentas básicas de segurança.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Kali Linux</span>
+                                        <p>Sistema operacional focado em segurança com diversas ferramentas.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/1" class="lab-link">Introdução ao Kali Linux</a>
+                                            <a href="/lab/3" class="lab-link">Configuração Avançada do Kali Linux</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Nmap</span>
+                                        <p>Ferramenta para descoberta de rede e escaneamento de portas.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/4" class="lab-link">Análise de Vulnerabilidades com Nmap</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Wireshark</span>
+                                        <p>Analisador de protocolos de rede para capturar e examinar tráfego.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/10" class="lab-link">Captura e Análise de Pacotes com Wireshark</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-book"></i> <a href="https://www.kali.org/docs/" target="_blank">Documentação Oficial Kali Linux</a></li>
+                                        <li><i class="fas fa-video"></i> <a href="https://www.youtube.com/watch?v=3tEKQk72Tg8" target="_blank">Tutorial Nmap para Iniciantes</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roadmap Intermediário -->
+                <div class="roadmap-level" id="intermediario">
+                    <div class="roadmap-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Conhecimentos Avançados de Rede</h3>
+                                <p>Aprofunde seus conhecimentos em redes e protocolos.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Arquitetura de Rede</span>
+                                        <p>Topologias, Segmentação, VLANs, Modelo OSI e TCP/IP em detalhes.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Protocolos Seguros</span>
+                                        <p>HTTPS, SSH, SFTP, TLS/SSL e VPN. Entenda como funcionam e como implementá-los.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/8" class="lab-link">Man-in-the-Middle Attacks</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Configuração de Firewall</span>
+                                        <p>Implementação e gerenciamento de regras de firewall.</p>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Computer-Networking-Top-Down-Approach-7th/dp/0133594149" target="_blank">Livro: Computer Networking: A Top-Down Approach</a></li>
+                                        <li><i class="fas fa-award"></i> <a href="https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/associate/ccna.html" target="_blank">Certificação: Cisco CCNA</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Testes de Penetração</h3>
+                                <p>Aprenda metodologias e ferramentas para testes de penetração.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Metodologias</span>
+                                        <p>OSSTMM, PTES, OWASP e outras estruturas de testes de penetração.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Tools and Exploits</span>
+                                        <p>Metasploit, BurpSuite, SQLmap, OWASP ZAP.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/13" class="lab-link">Testes de Penetração Web</a>
+                                            <a href="/lab/14" class="lab-link">Exploração de SQL Injection</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Relatórios</span>
+                                        <p>Como documentar vulnerabilidades e apresentar resultados.</p>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Penetration-Testing-Hands-Introduction-Hacking/dp/1593275641" target="_blank">Livro: Penetration Testing: A Hands-On Introduction to Hacking</a></li>
+                                        <li><i class="fas fa-award"></i> <a href="https://www.offensive-security.com/pwk-oscp/" target="_blank">Certificação: OSCP</a></li>
+                                        <li><i class="fas fa-gamepad"></i> <a href="https://tryhackme.com/" target="_blank">Plataforma: TryHackMe</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Segurança Web</h3>
+                                <p>Especialize-se em segurança de aplicações web.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Vulnerabilidades OWASP Top 10</span>
+                                        <p>Injeção SQL, XSS, CSRF, Broken Authentication, etc.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/15" class="lab-link">Cross-Site Scripting (XSS) e CSRF</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Segurança de API</span>
+                                        <p>Autenticação, Autorização, Rate Limiting e validação de dados.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">WAF e ferramentas de proteção</span>
+                                        <p>Como implementar e configurar firewalls de aplicação web.</p>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-globe"></i> <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10</a></li>
+                                        <li><i class="fas fa-gamepad"></i> <a href="https://portswigger.net/web-security" target="_blank">Plataforma: PortSwigger Web Security Academy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Análise e Resposta a Incidentes</h3>
+                                <p>Aprenda a identificar, responder e conter incidentes de segurança.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Detecção</span>
+                                        <p>SIEM, IDS/IPS, Análise de logs, Monitoramento de rede.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Resposta</span>
+                                        <p>Protocolos de resposta a incidentes, Contenção, Erradicação e Recuperação.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Forense Digital</span>
+                                        <p>Aquisição e análise de evidências, Timeline, Análise de malware.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/11" class="lab-link">Análise Forense de Dispositivos</a>
+                                            <a href="/lab/12" class="lab-link">Análise de Malware</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Incident-Response-Computer-Forensics-Third/dp/0071798684" target="_blank">Livro: Incident Response & Computer Forensics</a></li>
+                                        <li><i class="fas fa-award"></i> <a href="https://www.giac.org/certification/certified-incident-handler-gcih" target="_blank">Certificação: GIAC GCIH</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roadmap Avançado -->
+                <div class="roadmap-level" id="avancado">
+                    <div class="roadmap-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Segurança Ofensiva Avançada</h3>
+                                <p>Técnicas avançadas e especializadas para testes de penetração.</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Exploit Development</span>
+                                        <p>Buffer Overflows, Shellcode, Reverse Engineering, Bypass de proteções.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Testes de Penetração Específicos</span>
+                                        <p>Mobile, IoT, Cloud, Infraestrutura Crítica.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Red Team Operations</span>
+                                        <p>C2 Frameworks, Evasion Techniques, OPSEC, Social Engineering avançado.</p>
+                                        <div class="recommended-labs">
+                                            <strong>Laboratórios recomendados:</strong>
+                                            <a href="/lab/20" class="lab-link">Phishing Avançado</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-award"></i> <a href="https://www.offensive-security.com/pen300-osep/" target="_blank">Certificação: OSEP</a></li>
+                                        <li><i class="fas fa-gamepad"></i> <a href="https://www.hackthebox.eu/" target="_blank">Plataforma: Hack The Box</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Segurança em Nuvem</h3>
+                                <p>Segurança em ambientes de nuvem (AWS, Azure, GCP).</p>
+                                <ul class="timeline-skills">
+                                    <li>
+                                        <span class="skill-tag">Arquitetura Segura</span>
+                                        <p>IAM, Segmentação, Security Groups, Network ACLs.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Monitoramento e Logging</span>
+                                        <p>CloudTrail, CloudWatch, Azure Monitor, Google Cloud Monitoring.</p>
+                                    </li>
+                                    <li>
+                                        <span class="skill-tag">Compliance e Governança</span>
+                                        <p>Ferramentas de auditoria de segurança em nuvem.</p>
+                                    </li>
+                                </ul>
+                                <div class="resources-block">
+                                    <h4>Recursos para Estudo</h4>
+                                    <ul>
+                                        <li><i class="fas fa-award"></i> <a href="https://aws.amazon.com/certification/certified-security-specialty/" target="_blank">Certificação: AWS Certified Security Specialty</a></li>
+                                        <li><i class="fas fa-award"></i> <a href="https://docs.microsoft.com/en-us/learn/certifications/azure-security-engineer/" target="_blank">Certificação: Microsoft Azure Security Engineer</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                          <div class="timeline-dot"></div>
+                          <div class="timeline-content">
+                              <h3>DevSecOps</h3>
+                              <p>Implementação de segurança no ciclo de desenvolvimento de software.</p>
+                              <ul class="timeline-skills">
+                                  <li>
+                                      <span class="skill-tag">CI/CD Security</span>
+                                      <p>Segurança em pipelines, análise estática e dinâmica de código.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Containers e Kubernetes</span>
+                                      <p>Segurança em containers e orquestração (Docker, Kubernetes).</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Infrastructure as Code</span>
+                                      <p>Segurança em Terraform, CloudFormation, Ansible.</p>
+                                  </li>
+                              </ul>
+                              <div class="resources-block">
+                                  <h4>Recursos para Estudo</h4>
+                                  <ul>
+                                      <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Securing-DevOps-Security-Pipeline-Applications/dp/1617294136" target="_blank">Livro: Securing DevOps</a></li>
+                                      <li><i class="fas fa-award"></i> <a href="https://www.devsecops-institute.com/certifications/" target="_blank">Certificação: DevSecOps Foundation</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-dot"></div>
+                          <div class="timeline-content">
+                              <h3>Threat Hunting e Threat Intelligence</h3>
+                              <p>Técnicas avançadas para identificação proativa de ameaças.</p>
+                              <ul class="timeline-skills">
+                                  <li>
+                                      <span class="skill-tag">Threat Hunting</span>
+                                      <p>Técnicas e ferramentas para detecção proativa de ameaças.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Threat Intelligence</span>
+                                      <p>Coleta, análise e aplicação de inteligência sobre ameaças.</p>
+                                      <div class="recommended-labs">
+                                          <strong>Laboratórios recomendados:</strong>
+                                          <a href="/lab/21" class="lab-link">OSINT para Análise de Perfil</a>
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Advanced Analytics</span>
+                                      <p>UEBA, Machine Learning para detecção de anomalias.</p>
+                                  </li>
+                              </ul>
+                              <div class="resources-block">
+                                  <h4>Recursos para Estudo</h4>
+                                  <ul>
+                                      <li><i class="fas fa-award"></i> <a href="https://www.sans.org/cyber-security-courses/advanced-network-forensics-threat-hunting/" target="_blank">Curso: SANS FOR508</a></li>
+                                      <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Applied-Intelligence-Effective-Analysis-Security/dp/1118893174" target="_blank">Livro: Applied Intelligence</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Roadmap Especialista -->
+              <div class="roadmap-level" id="especialista">
+                  <div class="roadmap-timeline">
+                      <div class="timeline-item">
+                          <div class="timeline-dot"></div>
+                          <div class="timeline-content">
+                              <h3>Malware Analysis e Reverse Engineering</h3>
+                              <p>Análise profunda de código malicioso e engenharia reversa.</p>
+                              <ul class="timeline-skills">
+                                  <li>
+                                      <span class="skill-tag">Análise Estática e Dinâmica</span>
+                                      <p>Disassembly, Debugging, Sandboxing, Code Analysis.</p>
+                                      <div class="recommended-labs">
+                                          <strong>Laboratórios recomendados:</strong>
+                                          <a href="/lab/12" class="lab-link">Análise de Malware</a>
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Ferramentas Avançadas</span>
+                                      <p>IDA Pro, Ghidra, x64dbg, Immunity Debugger, Process Monitor.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Assembly e Low-Level</span>
+                                      <p>x86, x64, ARM Assembly, Windows/Linux Internals.</p>
+                                  </li>
+                              </ul>
+                              <div class="resources-block">
+                                  <h4>Recursos para Estudo</h4>
+                                  <ul>
+                                      <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901" target="_blank">Livro: Practical Malware Analysis</a></li>
+                                      <li><i class="fas fa-award"></i> <a href="https://www.giac.org/certification/reverse-engineering-malware-grem" target="_blank">Certificação: GIAC GREM</a></li>
+                                      <li><i class="fas fa-award"></i> <a href="https://zeltser.com/reverse-engineering-malicious-code-course/" target="_blank">Curso: FOR610</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-dot"></div>
+                          <div class="timeline-content">
+                              <h3>Security Research</h3>
+                              <p>Pesquisa avançada em segurança e descoberta de vulnerabilidades.</p>
+                              <ul class="timeline-skills">
+                                  <li>
+                                      <span class="skill-tag">Vulnerability Research</span>
+                                      <p>Descoberta de zero-days, Process de divulgação responsável.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Bug Bounty</span>
+                                      <p>Participação em programas de recompensa por vulnerabilidades.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Fuzzing</span>
+                                      <p>Técnicas e ferramentas de fuzzing para descoberta de vulnerabilidades.</p>
+                                  </li>
+                              </ul>
+                              <div class="resources-block">
+                                  <h4>Recursos para Estudo</h4>
+                                  <ul>
+                                      <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Web-Application-Hackers-Handbook-Exploiting/dp/1118026470" target="_blank">Livro: The Web Application Hacker's Handbook</a></li>
+                                      <li><i class="fas fa-gamepad"></i> <a href="https://hackerone.com/hacktivity" target="_blank">Plataforma: HackerOne</a></li>
+                                      <li><i class="fas fa-gamepad"></i> <a href="https://bugcrowd.com/programs" target="_blank">Plataforma: Bugcrowd</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-dot"></div>
+                          <div class="timeline-content">
+                              <h3>Hardware Security</h3>
+                              <p>Segurança em nível de hardware e dispositivos embarcados.</p>
+                              <ul class="timeline-skills">
+                                  <li>
+                                      <span class="skill-tag">IoT Security</span>
+                                      <p>Protocolos, Firmware Security, Comunicação segura.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Hardware Hacking</span>
+                                      <p>JTAG, SPI, UART, Side-channel attacks.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Embedded Systems</span>
+                                      <p>Segurança em sistemas embarcados e firmware.</p>
+                                  </li>
+                              </ul>
+                              <div class="resources-block">
+                                  <h4>Recursos para Estudo</h4>
+                                  <ul>
+                                      <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Practical-IoT-Hacking-Security-Internet/dp/1718500907" target="_blank">Livro: Practical IoT Hacking</a></li>
+                                      <li><i class="fas fa-award"></i> <a href="https://www.offensive-security.com/exp301-ine/" target="_blank">Curso: Offensive Security EXP-301</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-dot"></div>
+                          <div class="timeline-content">
+                              <h3>Criptografia Aplicada</h3>
+                              <p>Implementação e análise avançada de sistemas criptográficos.</p>
+                              <ul class="timeline-skills">
+                                  <li>
+                                      <span class="skill-tag">Cryptanalysis</span>
+                                      <p>Análise e quebra de algoritmos criptográficos vulneráveis.</p>
+                                      <div class="recommended-labs">
+                                          <strong>Laboratórios recomendados:</strong>
+                                          <a href="/lab/17" class="lab-link">Quebra de Senhas e Hash</a>
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Criptografia Quântica</span>
+                                      <p>Post-quantum cryptography, algoritmos resistentes a computação quântica.</p>
+                                  </li>
+                                  <li>
+                                      <span class="skill-tag">Blockchain Security</span>
+                                      <p>Segurança em blockchain, smart contracts e criptomoedas.</p>
+                                  </li>
+                              </ul>
+                              <div class="resources-block">
+                                  <h4>Recursos para Estudo</h4>
+                                  <ul>
+                                      <li><i class="fas fa-book"></i> <a href="https://www.amazon.com/Cryptography-Engineering-Principles-Practical-Applications/dp/0470474246" target="_blank">Livro: Cryptography Engineering</a></li>
+                                      <li><i class="fas fa-gamepad"></i> <a href="https://cryptohack.org/" target="_blank">Plataforma: CryptoHack</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <section class="roadmap-conclusion">
+              <h3>Próximos Passos</h3>
+              <p>Este roadmap é um guia para seu desenvolvimento na área de segurança cibernética. Lembre-se que:</p>
+              <ul>
+                  <li>A cyber segurança é um campo em constante evolução - mantenha-se atualizado</li>
+                  <li>Pratique regularmente em ambientes controlados e legais</li>
+                  <li>Participe de comunidades e eventos da área</li>
+                  <li>Considere especializações mais específicas conforme avança</li>
+              </ul>
+              <div class="cta-buttons">
+                  <a href="/" class="cta-button primary">Explorar Laboratórios</a>
+                  <a href="/sobre" class="cta-button secondary">Conhecer Nossa Plataforma</a>
+              </div>
+          </section>
+      </div>
+  </main>
+
+  <footer>
+      <div class="container">
+          <p>&copy; 2025 CyberLab - Laboratório de Cyber Segurança</p>
+      </div>
+  </footer>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Rolar para o topo da página
+          window.scrollTo(0, 0);
+          
+          // Configurar botões de seleção de nível de habilidade
+          const skillButtons = document.querySelectorAll('.skill-btn');
+          const roadmapLevels = document.querySelectorAll('.roadmap-level');
+          
+          skillButtons.forEach(button => {
+              button.addEventListener('click', function() {
+                  // Remover classe ativa de todos os botões
+                  skillButtons.forEach(btn => btn.classList.remove('active'));
+                  // Adicionar classe ativa ao botão clicado
+                  this.classList.add('active');
+                  
+                  // Mostrar/ocultar níveis de roadmap
+                  const levelToShow = this.getAttribute('data-level');
+                  roadmapLevels.forEach(level => {
+                      level.classList.remove('active');
+                      if (level.id === levelToShow) {
+                          level.classList.add('active');
+                      }
+                  });
+              });
+          });
+      });
+  </script>
+</body>
+</html>

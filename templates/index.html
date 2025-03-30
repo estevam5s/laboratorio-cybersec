@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberLab - Laboratório de Cyber Segurança</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberLab</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/sobre">Sobre o Laboratório</a></li>
+                    <li><a href="/roadmap">Roadmap</a></li>
+                    <li><a href="/" class="active">Laboratórios</a></li>
+                    <li><a href="/scripts">Scripts</a></li>
+                    <li><a href="/vagas">Vagas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="labs-header">
+                <h2>Selecione um Laboratório</h2>
+                <p>Escolha um dos laboratórios abaixo para iniciar seu aprendizado prático em cyber segurança</p>
+                
+                <div class="filter-container">
+                    <span>Filtrar por tipo:</span>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="Todos">Todos</button>
+                        <button class="filter-btn" data-category="Kali Linux">Kali Linux</button>
+                        <button class="filter-btn" data-category="Scanning">Scanning</button>
+                        <button class="filter-btn" data-category="Redes">Redes</button>
+                        <button class="filter-btn" data-category="Análise">Análise</button>
+                        <button class="filter-btn" data-category="Web">Web</button>
+                        <button class="filter-btn" data-category="Criptografia">Criptografia</button>
+                        <button class="filter-btn" data-category="Social">Social</button>
+                        <button class="filter-btn" data-category="Senhas">Senhas</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="labs-grid" id="labsContainer">
+                {% for lab in labs %}
+                <div class="lab-card" data-category="{{ lab.categoria }}">
+                    <div class="lab-card-content">
+                        <span class="category-badge category-{{ lab.categoria|lower|replace(' ', '-') }}">{{ lab.categoria }}</span>
+                        <h3>{{ lab.titulo }}</h3>
+                        <p>{{ lab.descricao }}</p>
+                        <div class="lab-meta">
+                            <span><i class="fas fa-clock"></i> Duração: {{ lab.duracao }}</span>
+                            <span><i class="fas fa-tasks"></i> Tarefas: {{ lab.tarefas }}</span>
+                        </div>
+                        <div class="lab-tags">
+                            {% if lab.video %}
+                            <span class="lab-tag video"><i class="fas fa-video"></i> Vídeo</span>
+                            {% endif %}
+                            {% if lab.desafio_timer %}
+                            <span class="lab-tag desafio"><i class="fas fa-stopwatch"></i> Desafio com Timer</span>
+                            {% endif %}
+                        </div>
+                        <a href="/lab/{{ lab.id }}" class="start-lab-btn">Iniciar Laboratório</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CyberLab - Laboratório de Cyber Segurança</p>
+        </div>
+    </footer>
+
+    <script>
+        // Garantir que a página seja carregada no topo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Rolar para o topo da página
+            window.scrollTo(0, 0);
+            
+            // Configurar os botões de filtro
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const labCards = document.querySelectorAll('.lab-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover classe ativa de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Adicionar classe ativa ao botão clicado
+                    this.classList.add('active');
+                    
+                    // Filtrar laboratórios
+                    const categoria = this.getAttribute('data-category');
+                    
+                    // Mostrar/ocultar cards com base na categoria
+                    labCards.forEach(card => {
+                        if (categoria === 'Todos') {
+                            card.style.display = 'block';
+                        } else {
+                            if (card.getAttribute('data-category') === categoria) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

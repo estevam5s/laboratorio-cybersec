@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts de Cyber Segurança - CyberLab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scripts.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberLab</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/sobre">Sobre o Laboratório</a></li>
+                    <li><a href="/roadmap">Roadmap</a></li>
+                    <li><a href="/">Laboratórios</a></li>
+                    <li><a href="/scripts" class="active">Scripts</a></li>
+                    <li><a href="/vagas">Vagas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="scripts-header">
+                <h2>Scripts de Cyber Segurança</h2>
+                <p>Explore nossa biblioteca abrangente de scripts e exemplos de código para Red Team, Blue Team e Penetration Testing. Todos os scripts são fornecidos apenas para fins educacionais.</p>
+                
+                <div class="disclaimer-box">
+                    <div class="disclaimer-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="disclaimer-content">
+                        <h3>Aviso de Responsabilidade</h3>
+                        <p>Estes scripts são fornecidos exclusivamente para fins educacionais e de pesquisa. O uso destes códigos deve ser restrito a ambientes controlados e com permissão explícita. O uso indevido pode violar leis locais e internacionais.</p>
+                        <p>Ao utilizar estes scripts, você concorda em:</p>
+                        <ul>
+                            <li>Usar os códigos apenas em sistemas próprios ou com autorização explícita</li>
+                            <li>Não utilizar para atividades ilegais ou prejudiciais</li>
+                            <li>Assumir total responsabilidade pelo uso e possíveis consequências</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="category-filters">
+                <h3>Explore por Categoria</h3>
+                <div class="category-grid">
+                    {% for category in categories %}
+                    <a href="/scripts/{{ category.id }}" class="category-card" data-category="{{ category.id }}">
+                        <div class="category-icon">
+                            {% if category.id == 'red-team' %}
+                                <i class="fas fa-user-ninja"></i>
+                            {% elif category.id == 'blue-team' %}
+                                <i class="fas fa-shield-alt"></i>
+                            {% elif category.id == 'pentesting' %}
+                                <i class="fas fa-laptop-code"></i>
+                            {% elif category.id == 'exploits' %}
+                                <i class="fas fa-bug"></i>
+                            {% elif category.id == 'recon' %}
+                                <i class="fas fa-search"></i>
+                            {% elif category.id == 'post-exploit' %}
+                                <i class="fas fa-door-open"></i>
+                            {% elif category.id == 'crypto' %}
+                                <i class="fas fa-key"></i>
+                            {% elif category.id == 'network' %}
+                                <i class="fas fa-network-wired"></i>
+                            {% elif category.id == 'web' %}
+                                <i class="fas fa-globe"></i>
+                            {% elif category.id == 'malware' %}
+                                <i class="fas fa-virus"></i>
+                            {% else %}
+                                <i class="fas fa-code"></i>
+                            {% endif %}
+                        </div>
+                        <h4>{{ category.nome }}</h4>
+                        <p>{{ category.descricao }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="featured-scripts">
+                <h3>Scripts em Destaque</h3>
+                
+                <div class="scripts-carousel">
+                    <div class="script-card featured">
+                        <div class="script-header">
+                            <span class="script-tag red-team">Red Team</span>
+                            <h4>Esteganografia com Metasploit</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Embedding de payload Metasploit em imagens para evasão de detecção.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/red-team/metasploit-steganography" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card featured">
+                        <div class="script-header">
+                            <span class="script-tag blue-team">Blue Team</span>
+                            <h4>Análise Automatizada de Logs</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Script para detecção de padrões suspeitos em logs de servidores web.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/blue-team/automated-log-analysis" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card featured">
+                        <div class="script-header">
+                            <span class="script-tag pentesting">Penetration Testing</span>
+                            <h4>Automação de Nmap com API</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Framework para automatização de scans Nmap com API para integração.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/pentesting/nmap-api-automation" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card featured">
+                        <div class="script-header">
+                            <span class="script-tag exploits">Exploits</span>
+                            <h4>Apache Log4j POC</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Demonstração educativa da vulnerabilidade Log4Shell (CVE-2021-44228).</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Java</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/exploits/log4j-vulnerability" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recent-scripts">
+                <h3>Scripts Recentes</h3>
+                <div class="scripts-grid">
+                    <div class="script-card">
+                        <div class="script-header">
+                            <span class="script-tag network">Redes</span>
+                            <h4>ARP Spoofing com Scapy</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Implementação educativa de ataque ARP Spoofing com biblioteca Scapy.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/network/arp-spoofing-scapy" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <span class="script-tag web">Web Hacking</span>
+                            <h4>Detector de XSS Automático</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Ferramenta automatizada para detecção de vulnerabilidades XSS em aplicações web.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> JavaScript</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/web/xss-detector" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <span class="script-tag post-exploit">Pós-Exploração</span>
+                            <h4>Persistência em Windows</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Técnicas educativas de persistência em sistemas Windows após acesso inicial.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> PowerShell</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/post-exploit/windows-persistence" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <span class="script-tag recon">Reconhecimento</span>
+                            <h4>OSINT Framework</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Framework para automatização de coleta de informações de fontes abertas (OSINT).</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Intermediário</span>
+                            </div>
+                            <a href="/scripts/recon/osint-framework" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <span class="script-tag crypto">Criptografia</span>
+                            <h4>Análise de Hash</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Ferramentas para identificação e análise de diferentes tipos de hashes.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Básico</span>
+                            </div>
+                            <a href="/scripts/crypto/hash-analyzer" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <div class="script-header">
+                            <span class="script-tag malware">Análise de Malware</span>
+                            <h4>Sandbox Automatizado</h4>
+                        </div>
+                        <div class="script-content">
+                            <p>Sistema de sandbox para análise comportamental de arquivos suspeitos.</p>
+                            <div class="script-meta">
+                                <span><i class="fas fa-code-branch"></i> Python</span>
+                                <span><i class="fas fa-level-up-alt"></i> Avançado</span>
+                            </div>
+                            <a href="/scripts/malware/automated-sandbox" class="view-script-btn">Ver Script</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="view-all-container">
+                    <a href="/scripts/all" class="view-all-btn">Ver Todos os Scripts <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </section>
+
+            <section class="educational-section">
+                <h3>Aprendizado Responsável</h3>
+                <div class="edu-content">
+                    <div class="edu-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="edu-text">
+                        <p>Nossa biblioteca de scripts foi criada exclusivamente para propósitos educacionais, para ajudar profissionais e estudantes a compreender melhor os conceitos de segurança cibernética através de exemplos práticos.</p>
+                        <p>Lembre-se de seguir estas práticas de uso responsável:</p>
+                        <ul>
+                            <li><strong>Ambiente Controlado:</strong> Utilize apenas em laboratórios ou ambientes de teste dedicados.</li>
+                            <li><strong>Permissão Prévia:</strong> Obtenha permissão explícita antes de testar em qualquer sistema.</li>
+                            <li><strong>Documentação:</strong> Mantenha registros detalhados de todas as atividades realizadas.</li>
+                            <li><strong>Divulgação Responsável:</strong> Ao encontrar vulnerabilidades, siga protocolos de divulgação responsável.</li>
+                        </ul>
+                        <a href="/roadmap" class="edu-btn">Consulte Nosso Roadmap de Aprendizado</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CyberLab - Laboratório de Cyber Segurança</p>
+        </div>
+    </footer>
+
+    <script>
+        // Garantir que a página carregue no topo
+        window.scrollTo(0, 0);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar funcionalidade aos cards de categoria (se necessário)
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
